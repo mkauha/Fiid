@@ -6,19 +6,7 @@ import { Form } from '@angular/forms';
 
 @Component({
   selector: 'app-question',
-  template: `
-    <div [ngSwitch]="question.controlType" [formGroup]="form">
-      <label>{{question.label}}</label>
-      <input *ngSwitchCase="'textbox'" [type]="question.textboxtype" [formControlName]="question.key">
-
-      <div *ngSwitchCase="'slider'">
-        <input id="shoeSize" [type]="question.type" [min]="question.min" [max]="question.max" [formControlName]="question.key">
-        <label shoeSize></label>
-      </div>
-
-    </div>
-  `
-  ,
+  templateUrl: './question.component.html',
   styleUrls: ['./question.component.css']
 })
 export class QuestionComponent implements OnInit {
