@@ -1,0 +1,25 @@
+<nb-layout>
+  <nb-layout-header fixed>
+  <!-- Insert header here -->
+  </nb-layout-header>
+
+  <nb-layout-column>
+  <div>
+    <h2>Generated form</h2>
+  </div>
+  <div>
+    <form [formGroup]="form">
+        <div *ngFor="let question of questions">
+          <app-question [question]="question" [form]="form"></app-question>
+        </div>
+        <button type="submit" [disabled]="!form.valid">Submit</button>
+    </form>
+  </div>
+
+</nb-layout-column>
+
+<nb-layout-footer fixed>
+<!-- Insert footer here -->
+</nb-layout-footer>
+
+</nb-layout>
