@@ -10,11 +10,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { QuestionComponent } from './question/question.component';
 import { QuestionControlService } from './question-control.service';
+import { GeneratedFormComponent } from './generated-form/generated-form.component';
+import { FormbuilderComponent } from './formbuilder/formbuilder.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    QuestionComponent
+    QuestionComponent,
+    GeneratedFormComponent,
+    FormbuilderComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
