@@ -1,4 +1,5 @@
 export interface Options {
+    id?: number;
     // Label to be shown in UI
     label?: string;
     // textbox, slider, ...?
@@ -10,12 +11,14 @@ export interface Options {
 }
 
 export class QuestionBase {
+    id: number;
     label: string;
     controlType: string;
     key: string;
     required: boolean;
 
     constructor(options: Options) {
+        this.id = options.id;
         this.label = options.label;
         this.controlType = options.controlType;
         this.key = options.key;
