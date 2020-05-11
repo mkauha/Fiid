@@ -6,13 +6,19 @@ import { QuestionBase } from './forms/question-base';
 export class QuestionControlService {
 
     questions: QuestionBase[];
+    formTitle: string;
 
-    saveQuestions(questions: QuestionBase[]) {
+    saveQuestions(title: string, questions: QuestionBase[]) {
         this.questions = questions;
+        this.formTitle = title;
     }
 
     getQuestions(): QuestionBase[] {
         return this.questions;
+    }
+
+    getFormTitle(): string {
+        return this.formTitle;
     }
 
     getFormGroup(): FormGroup {
