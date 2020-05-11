@@ -4,10 +4,12 @@ export class RadioQuestion extends QuestionBase {
     // Will be radio, overrides the base classes control type
     controlType = 'radio';
     // Amount of choices
-    optionAmount: number;
+    choiceAmount: number;
+    choices: string[];
 
     constructor(options: object) {
         super(options);
-        this.optionAmount = options['optionAmount'];
+        this.choiceAmount = options['choiceAmount'];
+        this.choices = options['choices'];
     }
 }

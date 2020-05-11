@@ -27,10 +27,18 @@ export class GeneratedFormComponent implements OnInit {
 
   generateTextForm() {
     this.formTitle = 'Test form';
-    this.questions.push(new TextboxQuestion({questionID: 1, key: 'firstname', label: 'Firstname', textboxtype: 'string', required: true}));
-    this.questions.push(new TextboxQuestion({questionID: 2, key: 'lastname', label: 'Lastname', textboxtype: 'string', required: true}));
-    this.questions.push(new TextareaQuestion({questionID: 3, key: 'story', label: 'Story of your life', rows: 10, required: true}));
-    this.questions.push(new RadioQuestion({questionID: 4, key: 'happiness', label: 'Happy?', optionAmount: 3, required: true}));
+    const radioChoices: string[] = ['Bad', 'Neutral', 'Great'];
+    this.questions.push(new TextboxQuestion({id: 1, key: 'firstname', label: 'Firstname', textboxtype: 'string', required: true}));
+    this.questions.push(new TextboxQuestion({id: 2, key: 'lastname', label: 'Lastname', textboxtype: 'string', required: true}));
+    this.questions.push(new TextareaQuestion({id: 3, key: 'story', label: 'Story of your life', rows: 10, required: true}));
+    this.questions.push(new RadioQuestion({
+      id: 4,
+      key: 'happiness',
+      label: 'Happy?',
+      choiceAmount: radioChoices.length,
+      choices: radioChoices,
+      required: false
+    }));
     this.form = this.generateTestFormGroup();
   }
 
