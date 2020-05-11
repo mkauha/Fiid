@@ -28,6 +28,7 @@ export class FormbuilderComponent implements OnInit {
   public questionID = 0;
   public questionKey = '';
   public questionLabel = '';
+  public radioChoices = ['Bad', 'Neutral', 'Great'];
   public questionisRequired = false;
 
   private baseButtonStatus = 'basic';
@@ -126,7 +127,7 @@ export class FormbuilderComponent implements OnInit {
 
   createTextbox() {
     this.questions.push(new TextboxQuestion({
-      questionID: this.questionID++,
+      id: this.questionID++,
       key: this.questionLabel.toLowerCase(),
       label: this.questionLabel,
       // make textboxtype customizable
@@ -137,7 +138,7 @@ export class FormbuilderComponent implements OnInit {
 
   createTextarea() {
     this.questions.push(new TextareaQuestion({
-      questionID: this.questionID++,
+      id: this.questionID++,
       key: this.questionLabel.toLowerCase(),
       label: this.questionLabel,
       // make rows customizable
@@ -148,11 +149,12 @@ export class FormbuilderComponent implements OnInit {
 
   createRadio() {
     this.questions.push(new RadioQuestion({
-      questionID: this.questionID++,
+      id: this.questionID++,
       key: this.questionLabel.toLowerCase(),
       label: this.questionLabel,
       // make optionAmount customizable
-      optionAmount: 3,
+      choiceAmount: this.radioChoices.length,
+      choices: this.radioChoices,
       required: this.questionisRequired}),
     );
   }
