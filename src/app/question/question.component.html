@@ -7,7 +7,11 @@
     </div>
 
     <div *ngSwitchCase="'radio'">
-      <input nbInput fullWidth *ngSwitchCase="'radio'" id="key" [formControlName]="question.key"> 
+      <nb-radio-group [formControlName]="question.key" [(ngModel)]="selectedOption">
+        <nb-radio value="question.choices[0]">{{question.choices[0]}}</nb-radio>
+        <nb-radio value="question.choices[1]">{{question.choices[1]}}</nb-radio>
+        <nb-radio value="question.choices[2]">{{question.choices[2]}}</nb-radio>
+      </nb-radio-group>
     </div>
 
 </div>

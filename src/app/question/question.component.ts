@@ -14,9 +14,11 @@ export class QuestionComponent implements OnInit {
   @Input() question;
   @Input() form: FormGroup;
 
+  selectedOption: string;
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.question);
   }
 
 }
