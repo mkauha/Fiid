@@ -16,9 +16,11 @@ export class FormbuilderComponent implements OnInit {
   questions: QuestionBase[] = [];
   form: FormGroup;
 
-  public showAddButtons: boolean = false;
-  public showFormQuestionInput: boolean = false;
-  public buttonName: String = 'Add';
+  public showAddButtons = false;
+  public showFormQuestionInput = false;
+  public addButtonStatus = 'success';
+  public addButtonIcon = 'plus';
+  public addButtonName = 'Add';
 
   public questionType: QuestionType;
 
@@ -26,6 +28,11 @@ export class FormbuilderComponent implements OnInit {
   public questionKey = '';
   public questionLabel = '';
   public questionisRequired = false;
+
+  private baseButtonStatus = 'basic';
+  public textboxButtonStatus = 'primary';
+  public textareaButtonStatus = 'info';
+  public radioButtonStatus = 'warning';
 
   constructor(private qcs: QuestionControlService) {
   }
@@ -37,9 +44,13 @@ export class FormbuilderComponent implements OnInit {
   toggleAdd() {
     this.showAddButtons = !this.showAddButtons;
     if (this.showAddButtons) {
-        this.buttonName = 'Cancel';
+        this.addButtonName = 'Cancel';
+        this.addButtonIcon = 'close';
+        this.addButtonStatus = 'danger';
     } else {
-      this.buttonName = 'Add';
+      this.addButtonName = 'Add';
+      this.addButtonIcon = 'plus';
+      this.addButtonStatus = 'success';
     }
   }
 
@@ -48,6 +59,7 @@ export class FormbuilderComponent implements OnInit {
   }
 
   onAddElement() {
+    this.reset();
     this.toggleAdd();
     if (this.showFormQuestionInput) {
       this.toggleFormQuestionInput();
@@ -55,18 +67,33 @@ export class FormbuilderComponent implements OnInit {
   }
 
   onAddTextBoxElement() {
+    this.reset();
     this.questionType = QuestionType.Textbox;
-    this.toggleFormQuestionInput();
+    this.textareaButtonStatus = this.baseButtonStatus;
+    this.radioButtonStatus = this.baseButtonStatus;
+    if (!this.showFormQuestionInput) {
+      this.toggleFormQuestionInput();
+    }
   }
 
   onAddTextAreaElement() {
+    this.reset();
     this.questionType = QuestionType.Textarea;
-    this.toggleFormQuestionInput();
+    this.textboxButtonStatus = this.baseButtonStatus;
+    this.radioButtonStatus = this.baseButtonStatus;
+    if (!this.showFormQuestionInput) {
+      this.toggleFormQuestionInput();
+    }
   }
 
   onAddRadioElement() {
+    this.reset();
     this.questionType = QuestionType.Radio;
-    this.toggleFormQuestionInput();
+    this.textareaButtonStatus = this.baseButtonStatus;
+    this.textboxButtonStatus = this.baseButtonStatus;
+    if (!this.showFormQuestionInput) {
+      this.toggleFormQuestionInput();
+    }
   }
 
   onSubmitQuestion() {
@@ -82,8 +109,18 @@ export class FormbuilderComponent implements OnInit {
         break;
     }
 
+    this.reset();
     this.toggleFormQuestionInput();
     this.toggleAdd();
+  }
+
+  reset() {
+    this.questionKey = '';
+    this.questionLabel = '';
+    this.questionisRequired = false;
+    this.textboxButtonStatus = 'primary';
+    this.textareaButtonStatus = 'info';
+    this.radioButtonStatus = 'warning';
   }
 
   createTextbox() {
