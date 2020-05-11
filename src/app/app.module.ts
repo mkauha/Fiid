@@ -3,8 +3,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule, NbLayoutModule, NbButtonModule, NbInputModule } from '@nebular/theme';
+import { NbThemeModule, NbLayoutModule, NbButtonModule, NbInputModule, NbCheckboxModule, NbToggleModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
+import { NbIconModule } from '@nebular/theme';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -32,7 +33,10 @@ import { HomeComponent } from './home/home.component';
     NbEvaIconsModule,
     AppRoutingModule,
     NbButtonModule,
-    NbInputModule
+    NbInputModule,
+    NbCheckboxModule,
+    NbIconModule,
+    NbToggleModule,
   ],
   providers: [QuestionControlService],
   bootstrap: [AppComponent]
