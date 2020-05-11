@@ -1,13 +1,13 @@
 <div [ngSwitch]="question.controlType" [formGroup]="form">
-    <label>{{question.label}} </label>
-    <input *ngSwitchCase="'textbox'" [type]="question.textboxtype" [formControlName]="question.key">
+    <div class="input-label"><label>{{question.label}} </label></div>
+    <div><input nbInput fullWidth  *ngSwitchCase="'textbox'" [type]="question.textboxtype" [formControlName]="question.key"></div>
 
      <div *ngSwitchCase="'textarea'">
-      <textarea [rows]="question.rows" [formControlName]="question.key"></textarea>
+      <textarea nbInput fullWidth [rows]="question.rows" [formControlName]="question.key"></textarea>
     </div>
 
     <div *ngSwitchCase="'radio'">
-      <input *ngSwitchCase="'radio'" id="key" [formControlName]="question.key"> 
+      <input nbInput fullWidth *ngSwitchCase="'radio'" id="key" [formControlName]="question.key"> 
     </div>
 
 </div>
