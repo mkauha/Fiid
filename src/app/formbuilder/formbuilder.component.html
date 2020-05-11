@@ -6,7 +6,8 @@
   
     <nb-layout-column>
       <div class="center">
-        <h3>Add form question</h3>
+        <input nbInput type="text" required placeholder="Form title"
+        [(ngModel)]="formTitle" name="formTitle">
       </div>
       <div class="center">
       <button class="button" nbButton status={{addButtonStatus}} shape="round" (click)="onAddElement()" ><nb-icon icon={{addButtonIcon}}></nb-icon></button>

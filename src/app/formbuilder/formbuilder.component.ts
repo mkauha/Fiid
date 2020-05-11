@@ -16,6 +16,7 @@ export class FormbuilderComponent implements OnInit {
   questions: QuestionBase[] = [];
   form: FormGroup;
 
+  public formTitle = '';
   public showAddButtons = false;
   public showFormQuestionInput = false;
   public addButtonStatus = 'success';
@@ -169,7 +170,7 @@ export class FormbuilderComponent implements OnInit {
   }
 
   onClickGenerateForm() {
-    this.qcs.saveQuestions(this.questions);
+    this.qcs.saveQuestions(this.formTitle, this.questions);
   }
 }
 
