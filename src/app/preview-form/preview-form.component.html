@@ -1,15 +1,10 @@
-<nb-card>
-    <nb-card-header class="center">
-      <h2>{{formTitle}}</h2>
-    </nb-card-header>
-    <nb-card-body>
+
     <div class="center">
       
       <form [formGroup]="form">
           <div class="input" *ngFor="let question of questions">
-            <app-question [question]="question" [form]="form"></app-question>
+            <app-question (onDeleteClicked)="delete($event)" [question]="question" [form]="form"></app-question>
           </div>
         </form>
     </div>
-    </nb-card-body>
-  </nb-card>
+

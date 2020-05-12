@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { QuestionBase } from '../forms/question-base';
+
 
 @Component({
   selector: 'app-preview-form',
@@ -12,10 +13,17 @@ export class PreviewFormComponent implements OnInit {
   @Input() questions: QuestionBase[] = [];
   @Input() formTitle = ' ';
 
+  // tslint:disable-next-line: no-output-on-prefix
+  @Output() onDeleteClicked = new EventEmitter<QuestionBase>();
+
   constructor() { }
 
   ngOnInit(): void {
 
+  }
+
+  delete(question: QuestionBase) {
+    this.onDeleteClicked.emit(question);
   }
 
 }
