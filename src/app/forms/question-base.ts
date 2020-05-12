@@ -4,6 +4,8 @@ export interface Options {
     label?: string;
     // textbox, slider, ...?
     controlType?: string;
+    // Short, Long, Emoji?
+    controlTypeLabel?: string;
     // key to differentiate the form elements
     key?: string;
     // Is it required or not?
@@ -14,6 +16,7 @@ export class QuestionBase {
     id: number;
     label: string;
     controlType: string;
+    controlTypeLabel: string;
     key: string;
     required: boolean;
 
@@ -21,6 +24,7 @@ export class QuestionBase {
         this.id = options.id;
         this.label = options.label;
         this.controlType = options.controlType;
+        this.controlTypeLabel = options.controlTypeLabel;
         this.key = options.key;
         this.required = options.required;
     }
