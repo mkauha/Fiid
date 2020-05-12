@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule, NbLayoutModule, NbButtonModule, NbInputModule, NbCheckboxModule, NbToggleModule, NbCardModule, NbRadioModule } from '@nebular/theme';
+import { NbThemeModule, NbLayoutModule, NbButtonModule, NbInputModule, NbCheckboxModule, NbToggleModule, NbCardModule, NbRadioModule, NbListModule, NbTabsetModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { NbIconModule } from '@nebular/theme';
 import { AppRoutingModule } from './app-routing.module';
@@ -14,6 +14,7 @@ import { QuestionControlService } from './question-control.service';
 import { GeneratedFormComponent } from './generated-form/generated-form.component';
 import { FormbuilderComponent } from './formbuilder/formbuilder.component';
 import { HomeComponent } from './home/home.component';
+import { PreviewFormComponent } from './preview-form/preview-form.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { HomeComponent } from './home/home.component';
     GeneratedFormComponent,
     FormbuilderComponent,
     HomeComponent,
+    PreviewFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +41,8 @@ import { HomeComponent } from './home/home.component';
     NbToggleModule,
     NbCardModule,
     NbRadioModule,
+    NbListModule,
+    NbTabsetModule,
   ],
   providers: [QuestionControlService],
   bootstrap: [AppComponent]
