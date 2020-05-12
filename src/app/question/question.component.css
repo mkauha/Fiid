@@ -1,9 +1,27 @@
 .input {
-    margin: 6px;
+    margin-bottom: 24px;
 }
 
 .input-label {
-    margin-top: 10px;
-    margin-bottom: 6px;
-    font-size:16px;
+    margin-bottom: 24px;
+}
+
+.emoji-icon {
+    font-size: 3rem;
+    margin: 5px;
+}
+
+.emoji-radio [type=radio] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.emoji-radio [type=radio] + fa-icon {
+    cursor: pointer;
+}
+
+.emoji-radio [type=radio]:checked + fa-icon {
+    outline: 2px solid #f00;
 }

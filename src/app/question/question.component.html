@@ -1,17 +1,44 @@
 <div [ngSwitch]="question.controlType" [formGroup]="form">
-    <div class="input-label"><label>{{question.label}} </label></div>
-    <div><input nbInput fullWidth  *ngSwitchCase="'textbox'" [type]="question.textboxtype" [formControlName]="question.key"></div>
+    <label class="input-label">{{question.label}} </label>
+      <!-- <span *ngIf="question.required"><nb-icon icon="checkmark-square" status="info"></nb-icon></span> -->
+      <nb-icon nbButton ghost (click)="delete(question)" icon='trash' status="danger"></nb-icon>
+    <div><input nbInput  *ngSwitchCase="'textbox'" [type]="question.textboxtype" [formControlName]="question.key" class="input"></div>
 
-     <div *ngSwitchCase="'textarea'">
-      <textarea nbInput fullWidth [rows]="question.rows" [formControlName]="question.key"></textarea>
+     <div *ngSwitchCase="'textarea'" class="input">
+      <textarea nbInput [rows]="question.rows" [formControlName]="question.key"></textarea>
     </div>
 
-    <div *ngSwitchCase="'radio'">
-      <nb-radio-group [formControlName]="question.key" [(ngModel)]="selectedOption">
+<!--     <div *ngSwitchCase="'radio'">
+      <nb-radio-group [formControlName]="question.key" [(ngModel)]="selectedRadioOption" *ngFor="let choice of question.choices | keyvalue">
+        <nb-radio value="choice.value">{{choice.value}}</nb-radio>
+      </nb-radio-group>
+    </div> -->
+
+    <div *ngSwitchCase="'radio'" class="input">
+      <div [formControlName]="question.key" [(ngModel)]="selectedEmoji">
+        <label class="emoji-radio">
+          <input type="radio" name="test" value="one">
+          <!-- <nb-icon pack="font-awesome" ghost icon="faFrown" status="danger"></nb-icon> -->
+          <fa-icon class="emoji-icon" [icon]="faFrown" fa-lg></fa-icon>
+        </label>
+
+        <label class="emoji-radio">
+          <input type="radio" name="test" value="two">
+          <!-- <nb-icon pack="font-awesome" nbButton ghost icon="meh" status="danger"></nb-icon> -->
+          <fa-icon class="emoji-icon" [icon]="faMeh" fa-lg></fa-icon>
+        </label>
+
+        <label class="emoji-radio">
+          <input type="radio" name="test" value="three">
+          <!-- <nb-icon pack="font-awesome" nbButton ghost icon="smile" status="danger"></nb-icon> -->
+          <fa-icon class="emoji-icon" [icon]="faSmile" fa-lg></fa-icon>
+        </label>
+<!-- 
         <nb-radio value="question.choices[0]">{{question.choices[0]}}</nb-radio>
         <nb-radio value="question.choices[1]">{{question.choices[1]}}</nb-radio>
-        <nb-radio value="question.choices[2]">{{question.choices[2]}}</nb-radio>
-      </nb-radio-group>
+        <nb-radio value="question.choices[2]">{{question.choices[2]}}</nb-radio> -->
+      </div>
+
     </div>
 
 </div>
