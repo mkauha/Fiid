@@ -5,6 +5,7 @@ import { FormGroup } from '@angular/forms';
 import { TextboxQuestion } from '../forms/question-textbox';
 import { RadioQuestion } from '../forms/question-radio';
 import { TextareaQuestion } from '../forms/question-textarea';
+import { PreviewFormComponent } from '../preview-form/preview-form.component';
 
 @Component({
   selector: 'app-formbuilder',
@@ -13,8 +14,8 @@ import { TextareaQuestion } from '../forms/question-textarea';
 })
 export class FormbuilderComponent implements OnInit {
 
-  questions: QuestionBase[] = [];
-  form: FormGroup;
+  public questions: QuestionBase[] = [];
+  public form: FormGroup;
 
   public formTitle = '';
   public showAddButtons = false;
@@ -32,6 +33,7 @@ export class FormbuilderComponent implements OnInit {
   public questionisRequired = false;
 
   private baseButtonStatus = 'basic';
+  public selectedInputStatus = 'basic';
   public textboxButtonStatus = 'primary';
   public textareaButtonStatus = 'info';
   public radioButtonStatus = 'warning';
@@ -71,6 +73,7 @@ export class FormbuilderComponent implements OnInit {
   onAddTextBoxElement() {
     this.reset();
     this.questionType = QuestionType.Textbox;
+    this.selectedInputStatus = this.textboxButtonStatus;
     this.textareaButtonStatus = this.baseButtonStatus;
     this.radioButtonStatus = this.baseButtonStatus;
     if (!this.showFormQuestionInput) {
@@ -81,6 +84,7 @@ export class FormbuilderComponent implements OnInit {
   onAddTextAreaElement() {
     this.reset();
     this.questionType = QuestionType.Textarea;
+    this.selectedInputStatus = this.textareaButtonStatus;
     this.textboxButtonStatus = this.baseButtonStatus;
     this.radioButtonStatus = this.baseButtonStatus;
     if (!this.showFormQuestionInput) {
@@ -91,6 +95,7 @@ export class FormbuilderComponent implements OnInit {
   onAddRadioElement() {
     this.reset();
     this.questionType = QuestionType.Radio;
+    this.selectedInputStatus = this.radioButtonStatus;
     this.textareaButtonStatus = this.baseButtonStatus;
     this.textboxButtonStatus = this.baseButtonStatus;
     if (!this.showFormQuestionInput) {
@@ -114,6 +119,8 @@ export class FormbuilderComponent implements OnInit {
     this.reset();
     this.toggleFormQuestionInput();
     this.toggleAdd();
+    this.qcs.saveQuestions(this.formTitle, this.questions);
+    this.form = this.qcs.getFormGroup();
   }
 
   reset() {
