@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule, NbLayoutModule, NbButtonModule, NbInputModule, NbCheckboxModule, NbToggleModule, NbCardModule, NbRadioModule, NbListModule, NbTabsetModule } from '@nebular/theme';
+import { NbThemeModule, NbLayoutModule, NbButtonModule, NbInputModule, NbCheckboxModule, NbToggleModule, NbCardModule, NbRadioModule, NbListModule, NbTabsetModule, NbIconLibraries } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { NbIconModule } from '@nebular/theme';
 import { AppRoutingModule } from './app-routing.module';
@@ -15,6 +15,8 @@ import { GeneratedFormComponent } from './generated-form/generated-form.componen
 import { FormbuilderComponent } from './formbuilder/formbuilder.component';
 import { HomeComponent } from './home/home.component';
 import { PreviewFormComponent } from './preview-form/preview-form.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 
 @NgModule({
   declarations: [
@@ -29,6 +31,7 @@ import { PreviewFormComponent } from './preview-form/preview-form.component';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    FontAwesomeModule,
     NoopAnimationsModule,
     NbThemeModule.forRoot({ name: 'default' }),
     NbLayoutModule,
@@ -44,7 +47,7 @@ import { PreviewFormComponent } from './preview-form/preview-form.component';
     NbListModule,
     NbTabsetModule,
   ],
-  providers: [QuestionControlService],
+  providers: [QuestionControlService, NbIconLibraries],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
