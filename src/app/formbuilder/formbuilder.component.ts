@@ -149,7 +149,7 @@ export class FormbuilderComponent implements OnInit {
       key: this.questionLabel.toLowerCase(),
       label: this.questionLabel,
       // make rows customizable
-      rows: 10,
+      rows: 3,
       required: this.questionisRequired}),
     );
   }
