@@ -5,6 +5,7 @@ import { QuestionBase } from '../forms/question-base';
 import { TextboxQuestion } from '../forms/question-textbox';
 import { TextareaQuestion } from '../forms/question-textarea';
 import { RadioQuestion } from '../forms/question-radio';
+import { EmojiQuestion } from '../forms/question-emoji';
 
 @Component({
   selector: 'app-generated-form',
@@ -20,25 +21,32 @@ export class GeneratedFormComponent implements OnInit {
   constructor(private qcs: QuestionControlService) { }
 
   ngOnInit(): void {
-    this.questions = this.qcs.getQuestions();
+/*     this.questions = this.qcs.getQuestions();
     this.formTitle = this.qcs.getFormTitle();
-    this.form = this.qcs.getFormGroup();
+    this.form = this.qcs.getFormGroup(); */
+    this.generateTextForm();
+  }
+
+  onSubmit() {
+    console.log(this.form);
+    console.log(this.questions);
   }
 
   generateTextForm() {
     this.formTitle = 'Test form';
-    const radioChoices: string[] = ['Bad', 'Neutral', 'Great'];
+    const radioChoices: string[] = ['Option 1', 'Option 2', 'Option 3'];
     this.questions.push(new TextboxQuestion({id: 1, key: 'firstname', label: 'Firstname', textboxtype: 'string', required: true}));
     this.questions.push(new TextboxQuestion({id: 2, key: 'lastname', label: 'Lastname', textboxtype: 'string', required: true}));
-    this.questions.push(new TextareaQuestion({id: 3, key: 'story', label: 'Story of your life', rows: 10, required: true}));
+    this.questions.push(new TextareaQuestion({id: 3, key: 'story', label: 'Story of your life', rows: 3, required: true}));
     this.questions.push(new RadioQuestion({
       id: 4,
       key: 'happiness',
-      label: 'Happy?',
+      label: 'Pick one?',
       choiceAmount: radioChoices.length,
       choices: radioChoices,
       required: false
     }));
+    this.questions.push(new EmojiQuestion({id: 5, key: 'happy', label: 'Happy?', required: true}));
     this.form = this.generateTestFormGroup();
   }
 
@@ -53,6 +61,7 @@ export class GeneratedFormComponent implements OnInit {
         }
     }
     return new FormGroup(group);
-}
+  }
+
 
 }

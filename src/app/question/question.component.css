@@ -1,15 +1,19 @@
 .input {
-    margin-bottom: 24px;
+   
 }
 
 .input-label {
-    margin-bottom: 24px;
+    
+}
+
+.textbox, textarea {
+    max-width: 60%;
 }
 
 .radio-input {
     margin-bottom: 24px;
     margin: auto;
-    width: 30%;
+    width: 40%;
 }
 
 

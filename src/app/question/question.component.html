@@ -2,10 +2,10 @@
     <label class="input-label">{{question.label}} </label>
       <!-- <span *ngIf="question.required"><nb-icon icon="checkmark-square" status="info"></nb-icon></span> -->
       <!-- <nb-icon nbButton ghost (click)="delete(question)" icon='trash' status="danger"></nb-icon> -->
-    <div><input nbInput  *ngSwitchCase="'textbox'" [type]="question.textboxtype" [formControlName]="question.key" class="input"></div>
+    <div><input nbInput fullWidth *ngSwitchCase="'textbox'" [type]="question.textboxtype" [formControlName]="question.key" class="textbox"></div>
 
-     <div *ngSwitchCase="'textarea'" class="input">
-      <textarea nbInput [rows]="question.rows" [formControlName]="question.key"></textarea>
+     <div *ngSwitchCase="'textarea'" >
+      <textarea nbInput fullWidth [rows]="question.rows" [formControlName]="question.key" class="textarea"></textarea>
     </div>
 
     <div *ngSwitchCase="'radio'" class="radio-input">

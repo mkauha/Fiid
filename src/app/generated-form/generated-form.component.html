@@ -1,10 +1,5 @@
 <nb-layout>
-  <nb-layout-header fixed>
-    <h1>Generated form</h1>
-  </nb-layout-header>
-
   <nb-layout-column>
-    <button nbButton status="info" shape="round" (click)="generateTextForm()">Test</button>
   <nb-card>
   <nb-card-header class="center">
     <h2>{{formTitle}}</h2>
@@ -12,21 +7,17 @@
   <nb-card-body>
   <div class="center">
     
-    <form [formGroup]="form">
+    <form (ngSubmit)="onSubmit()" [formGroup]="form">
         <div class="input" *ngFor="let question of questions">
           <app-question [question]="question" [form]="form"></app-question>
         </div>
         <div class="buttonSubmit">
-          <button nbButton status="success" shape="round" type="submit" [disabled]="!form.valid">Submit</button>
+          <button nbButton status="success" shape="round" type="submit">Submit</button>
         </div>
       </form>
   </div>
   </nb-card-body>
 </nb-card>
 </nb-layout-column>
-
-<nb-layout-footer fixed>
-<!-- Insert footer here -->
-</nb-layout-footer>
 
 </nb-layout>
