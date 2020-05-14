@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { QuestionBase } from '../forms/question-base';
 import { QuestionControlService } from '../question-control.service';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, NgForm } from '@angular/forms';
 import { TextboxQuestion } from '../forms/question-textbox';
 import { RadioQuestion } from '../forms/question-radio';
 import { TextareaQuestion } from '../forms/question-textarea';
 import { PreviewFormComponent } from '../preview-form/preview-form.component';
+import { EmojiQuestion } from '../forms/question-emoji';
 
 @Component({
   selector: 'app-formbuilder',
@@ -17,9 +18,11 @@ export class FormbuilderComponent implements OnInit {
   public questions: QuestionBase[] = [];
   public form: FormGroup;
 
+  public allowGeneration = false;
   public formTitle = '';
   public showAddButtons = false;
   public showFormQuestionInput = false;
+
   public addButtonStatus = 'success';
   public addButtonIcon = 'plus';
   public addButtonName = 'Add';
@@ -29,14 +32,18 @@ export class FormbuilderComponent implements OnInit {
   public questionID = 0;
   public questionKey = '';
   public questionLabel = '';
-  public radioChoices = ['Bad', 'Neutral', 'Great'];
   public questionisRequired = false;
+
+  public showChoiceInput = false;
+  public radioChoices = ['', '', ''];
+  public choiceAmount = this.radioChoices.length;
 
   private baseButtonStatus = 'basic';
   public selectedInputStatus = 'basic';
   public textboxButtonStatus = 'primary';
   public textareaButtonStatus = 'info';
-  public radioButtonStatus = 'warning';
+  public radioButtonStatus = 'success';
+  public emojiButtonStatus = 'warning';
 
   constructor(private qcs: QuestionControlService) {
   }
@@ -76,6 +83,7 @@ export class FormbuilderComponent implements OnInit {
     this.selectedInputStatus = this.textboxButtonStatus;
     this.textareaButtonStatus = this.baseButtonStatus;
     this.radioButtonStatus = this.baseButtonStatus;
+    this.emojiButtonStatus = this.baseButtonStatus;
     if (!this.showFormQuestionInput) {
       this.toggleFormQuestionInput();
     }
@@ -87,6 +95,7 @@ export class FormbuilderComponent implements OnInit {
     this.selectedInputStatus = this.textareaButtonStatus;
     this.textboxButtonStatus = this.baseButtonStatus;
     this.radioButtonStatus = this.baseButtonStatus;
+    this.emojiButtonStatus = this.baseButtonStatus;
     if (!this.showFormQuestionInput) {
       this.toggleFormQuestionInput();
     }
@@ -98,12 +107,26 @@ export class FormbuilderComponent implements OnInit {
     this.selectedInputStatus = this.radioButtonStatus;
     this.textareaButtonStatus = this.baseButtonStatus;
     this.textboxButtonStatus = this.baseButtonStatus;
+    this.emojiButtonStatus = this.baseButtonStatus;
+    this.showChoiceInput = true;
     if (!this.showFormQuestionInput) {
       this.toggleFormQuestionInput();
     }
   }
 
-  onSubmitQuestion() {
+  onAddEmojiElement() {
+    this.reset();
+    this.questionType = QuestionType.Emoji;
+    this.selectedInputStatus = this.emojiButtonStatus;
+    this.textareaButtonStatus = this.baseButtonStatus;
+    this.textboxButtonStatus = this.baseButtonStatus;
+    this.radioButtonStatus = this.baseButtonStatus;
+    if (!this.showFormQuestionInput) {
+      this.toggleFormQuestionInput();
+    }
+  }
+
+  onSubmitQuestion(f: NgForm) {
     switch (this.questionType) {
       case QuestionType.Textbox:
         this.createTextbox();
@@ -112,7 +135,10 @@ export class FormbuilderComponent implements OnInit {
         this.createTextarea();
         break;
       case QuestionType.Radio:
-        this.createRadio();
+        this.createRadio(f);
+        break;
+      case QuestionType.Emoji:
+        this.createEmoji();
         break;
     }
 
@@ -121,6 +147,15 @@ export class FormbuilderComponent implements OnInit {
     this.toggleAdd();
     this.qcs.saveQuestions(this.formTitle, this.questions);
     this.form = this.qcs.getFormGroup();
+    this.allowGeneration = this.questions.length >= 1;
+  }
+
+  addRadioChoice() {
+    this.radioChoices.push('');
+  }
+
+  removeRadioChoice() {
+    this.radioChoices.splice(this.radioChoices.length - 1);
   }
 
   reset() {
@@ -129,7 +164,11 @@ export class FormbuilderComponent implements OnInit {
     this.questionisRequired = false;
     this.textboxButtonStatus = 'primary';
     this.textareaButtonStatus = 'info';
-    this.radioButtonStatus = 'warning';
+    this.radioButtonStatus = 'success';
+    this.emojiButtonStatus = 'warning';
+    this.showChoiceInput = false;
+    this.radioChoices = ['', '', ''];
+    this.choiceAmount = this.radioChoices.length;
   }
 
   createTextbox() {
@@ -154,7 +193,15 @@ export class FormbuilderComponent implements OnInit {
     );
   }
 
-  createRadio() {
+  createRadio(f: NgForm) {
+    const emptyArray: string[] = [];
+    this.radioChoices = emptyArray;
+    for (const value in f.value) {
+      if (value.toString().includes('option')) {
+        this.radioChoices.push(f.value[value]);
+      }
+    }
+
     this.questions.push(new RadioQuestion({
       id: this.questionID++,
       key: this.questionLabel.toLowerCase(),
@@ -162,6 +209,16 @@ export class FormbuilderComponent implements OnInit {
       // make optionAmount customizable
       choiceAmount: this.radioChoices.length,
       choices: this.radioChoices,
+      required: this.questionisRequired}),
+    );
+
+  }
+
+  createEmoji() {
+    this.questions.push(new EmojiQuestion({
+      id: this.questionID++,
+      key: this.questionLabel.toLowerCase(),
+      label: this.questionLabel,
       required: this.questionisRequired}),
     );
   }
@@ -176,10 +233,14 @@ export class FormbuilderComponent implements OnInit {
     if (removalIndex !== -1) {
       this.questions.splice(removalIndex, 1);
     }
+
+    this.allowGeneration = this.questions.length >= 1;
   }
 
   onClickGenerateForm() {
-    this.qcs.saveQuestions(this.formTitle, this.questions);
+    if (this.questions.length > 1) {
+      this.qcs.saveQuestions(this.formTitle, this.questions);
+    }
   }
 }
 
@@ -187,4 +248,5 @@ enum QuestionType {
   Textbox,
   Textarea,
   Radio,
+  Emoji,
 }
