@@ -1,20 +1,20 @@
 <div [ngSwitch]="question.controlType" [formGroup]="form">
     <label class="input-label">{{question.label}} </label>
       <!-- <span *ngIf="question.required"><nb-icon icon="checkmark-square" status="info"></nb-icon></span> -->
-      <nb-icon nbButton ghost (click)="delete(question)" icon='trash' status="danger"></nb-icon>
+      <!-- <nb-icon nbButton ghost (click)="delete(question)" icon='trash' status="danger"></nb-icon> -->
     <div><input nbInput  *ngSwitchCase="'textbox'" [type]="question.textboxtype" [formControlName]="question.key" class="input"></div>
 
      <div *ngSwitchCase="'textarea'" class="input">
       <textarea nbInput [rows]="question.rows" [formControlName]="question.key"></textarea>
     </div>
 
-<!--     <div *ngSwitchCase="'radio'">
+    <div *ngSwitchCase="'radio'" class="radio-input">
       <nb-radio-group [formControlName]="question.key" [(ngModel)]="selectedRadioOption" *ngFor="let choice of question.choices | keyvalue">
-        <nb-radio value="choice.value">{{choice.value}}</nb-radio>
+        <nb-radio [name]="choice.value" [value]="choice.value">{{choice.value}}</nb-radio>
       </nb-radio-group>
-    </div> -->
+    </div>
 
-    <div *ngSwitchCase="'radio'" class="input">
+    <div *ngSwitchCase="'emoji'" class="input">
       <div [formControlName]="question.key">
         <label class="emoji-radio">
           <input type="radio" name="frown" value='1' (click) ="emojiClick($event)">

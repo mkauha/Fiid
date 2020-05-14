@@ -6,6 +6,13 @@
     margin-bottom: 24px;
 }
 
+.radio-input {
+    margin-bottom: 24px;
+    margin: auto;
+    width: 30%;
+}
+
+
 .emoji-icon {
     font-size: 2.5rem;
     margin: 5px;

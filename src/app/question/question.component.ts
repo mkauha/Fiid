@@ -36,14 +36,11 @@ export class QuestionComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {
-    console.log(this.question);
-  }
+  ngOnInit(): void {}
 
-  delete(question: QuestionBase) {
-    console.log(question);
+/*   delete(question: QuestionBase) {
     this.onDeleteClicked.emit(question);
-  }
+  } */
 
   emojiClick(event: any) {
     console.log(event);
