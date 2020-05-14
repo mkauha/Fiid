@@ -15,23 +15,20 @@
     </div> -->
 
     <div *ngSwitchCase="'radio'" class="input">
-      <div [formControlName]="question.key" [(ngModel)]="selectedEmoji">
+      <div [formControlName]="question.key">
         <label class="emoji-radio">
-          <input type="radio" name="test" value="one">
-          <!-- <nb-icon pack="font-awesome" ghost icon="faFrown" status="danger"></nb-icon> -->
-          <fa-icon class="emoji-icon" [icon]="faFrown" fa-lg></fa-icon>
+          <input type="radio" name="frown" value='1' (click) ="emojiClick($event)">
+          <fa-icon class="emoji-icon" [icon]="faFrown" fa-lg [styles]="{'color': faFrownColor}"></fa-icon>
         </label>
 
         <label class="emoji-radio">
-          <input type="radio" name="test" value="two">
-          <!-- <nb-icon pack="font-awesome" nbButton ghost icon="meh" status="danger"></nb-icon> -->
-          <fa-icon class="emoji-icon" [icon]="faMeh" fa-lg></fa-icon>
+          <input type="radio" name="meh" value='2' (click)="emojiClick($event)">
+          <fa-icon class="emoji-icon" [icon]="faMeh" fa-lg [styles]="{'color': faMehColor}"></fa-icon>
         </label>
 
         <label class="emoji-radio">
-          <input type="radio" name="test" value="three">
-          <!-- <nb-icon pack="font-awesome" nbButton ghost icon="smile" status="danger"></nb-icon> -->
-          <fa-icon class="emoji-icon" [icon]="faSmile" fa-lg></fa-icon>
+          <input type="radio" name="smile" value='3' (click)="emojiClick($event)">
+          <fa-icon class="emoji-icon" [icon]="faSmile" fa-lg [styles]="{'color': faSmileColor}"></fa-icon>
         </label>
 <!-- 
         <nb-radio value="question.choices[0]">{{question.choices[0]}}</nb-radio>

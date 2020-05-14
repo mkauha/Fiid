@@ -19,20 +19,49 @@ export class QuestionComponent implements OnInit {
   selectedRadioOption: string;
   selectedEmoji: string;
 
-  faSmile = faSmile;
   faFrown = faFrown;
   faMeh = faMeh;
+  faSmile = faSmile;
 
-  constructor(private iconService: NbIconLibraries) {
-    this.iconService.registerFontPack('font-awesome', { iconClassPrefix: 'fa' });
+  faIconUnselectedColor = '#DBE1EA';
+  faFrownDefaultColor = '#FF3A6C';
+  faMehDefaultColor = '#FFA538';
+  faSmileDefaultColor = '#00D390';
+
+  faFrownColor = this.faFrownDefaultColor;
+  faMehColor = this.faMehDefaultColor;
+  faSmileColor = this.faSmileDefaultColor;
+
+  constructor() {
+
   }
 
   ngOnInit(): void {
     console.log(this.question);
   }
-  
+
   delete(question: QuestionBase) {
     console.log(question);
     this.onDeleteClicked.emit(question);
+  }
+
+  emojiClick(event: any) {
+    console.log(event);
+    switch (event.target.value) {
+      case '1': this.faFrownColor = this.faFrownDefaultColor;
+                this.faMehColor = this.faIconUnselectedColor;
+                this.faSmileColor = this.faIconUnselectedColor;
+                break;
+      case '2': this.faMehColor = this.faMehDefaultColor;
+                this.faSmileColor = this.faIconUnselectedColor;
+                this.faFrownColor = this.faIconUnselectedColor;
+                break;
+      case '3': this.faSmileColor = this.faSmileDefaultColor;
+                this.faMehColor = this.faIconUnselectedColor;
+                this.faFrownColor = this.faIconUnselectedColor;
+                break;
+    }
+    this.selectedEmoji = event.target.value;
+    console.log(this.selectedEmoji);
   }
 }
