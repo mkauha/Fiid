@@ -7,6 +7,7 @@ import { NbThemeModule, NbLayoutModule, NbButtonModule, NbInputModule, NbCheckbo
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { NbIconModule } from '@nebular/theme';
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http'
 
 import { AppComponent } from './app.component';
 import { QuestionComponent } from './question/question.component';
@@ -16,6 +17,7 @@ import { FormbuilderComponent } from './formbuilder/formbuilder.component';
 import { HomeComponent } from './home/home.component';
 import { PreviewFormComponent } from './preview-form/preview-form.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { HttpService } from './http.service';
 
 
 @NgModule({
@@ -31,6 +33,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     FontAwesomeModule,
     NoopAnimationsModule,
     NbThemeModule.forRoot({ name: 'default' }),
@@ -47,7 +50,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     NbListModule,
     NbTabsetModule,
   ],
-  providers: [QuestionControlService, NbIconLibraries],
+  providers: [QuestionControlService, NbIconLibraries, HttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

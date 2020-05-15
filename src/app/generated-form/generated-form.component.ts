@@ -6,6 +6,7 @@ import { TextboxQuestion } from '../forms/question-textbox';
 import { TextareaQuestion } from '../forms/question-textarea';
 import { RadioQuestion } from '../forms/question-radio';
 import { EmojiQuestion } from '../forms/question-emoji';
+import { HttpService } from '../http.service';
 
 @Component({
   selector: 'app-generated-form',
@@ -18,7 +19,7 @@ export class GeneratedFormComponent implements OnInit {
   questions: QuestionBase[] = [];
   formTitle = ' ';
 
-  constructor(private qcs: QuestionControlService) { }
+  constructor(private qcs: QuestionControlService, private httpService: HttpService) { }
 
   ngOnInit(): void {
 /*     this.questions = this.qcs.getQuestions();
@@ -28,8 +29,9 @@ export class GeneratedFormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.form);
+    console.log(this.form.value);
     console.log(this.questions);
+    this.httpService.postForm(this.form.value);
   }
 
   generateTextForm() {
