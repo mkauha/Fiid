@@ -24,6 +24,8 @@ export class FormbuilderComponent implements OnInit {
   public formTitle = '';
   public showAddButtons = false;
   public showFormQuestionInput = false;
+  public showGeneratedUrl = false;
+  public generatedUrl = 'http://localhost:3000/forms/0ae34a35-d281-4867-89c2-1e2d77d747b6';
 
   public addButtonStatus = 'success';
   public addButtonIcon = 'plus';
@@ -243,7 +245,21 @@ export class FormbuilderComponent implements OnInit {
     if (this.questions.length >= 1) {
       this.qcs.saveForm(new GeneratedForm(this.formTitle, new Date(), this.questions));
       this.httpService.postGeneratedForm(this.qcs.getForm());
+      this.showGeneratedUrl = true;
     }
+  }
+
+  onGoToGeneratedUrl() {
+    console.log(`Go to ${this.generatedUrl}`);
+  }
+
+  onCopyGeneratedUrl() {
+    console.log(`Copy ${this.generatedUrl}`);
+  }
+
+  onModifyForm() {
+    this.showGeneratedUrl = false;
+    // delete previous form from backend
   }
 }
 
