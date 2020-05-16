@@ -1,16 +1,36 @@
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { QuestionBase } from './forms/question-base';
+import { GeneratedForm } from './forms/generated-form';
 
 @Injectable()
 export class QuestionControlService {
 
-    questions: QuestionBase[];
+    form: GeneratedForm;
+    questions: QuestionBase[] = [];
     formTitle: string;
+
+    saveForm(form: GeneratedForm) {
+        this.form = form;
+        this.questions = form.questions;
+        this.formTitle = form.title;
+
+/*         console.log('QCS');
+        console.log(form);
+        console.log(form.questions);
+        console.log(this.questions);
+        console.log(form.title);
+        console.log(this.formTitle); */
+    }
+
 
     saveQuestions(title: string, questions: QuestionBase[]) {
         this.questions = questions;
         this.formTitle = title;
+    }
+
+    getForm(): GeneratedForm {
+        return this.form;
     }
 
     getQuestions(): QuestionBase[] {
