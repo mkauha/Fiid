@@ -1,26 +1,31 @@
 <nb-layout>
   <nb-layout-column>
-    <input nbInput fullWidth type="text" required placeholder="URL"
-    [(ngModel)]="formUrl" name="formUrl">
-    <button nbButton status="success" (click)="onFindForm()">Find</button>
-  <nb-card>
-  <nb-card-header class="center">
-    <h2>{{formTitle}}</h2>
-  </nb-card-header>
-  <nb-card-body>
-  <div class="center">
-    
-    <form (ngSubmit)="onSubmit()" [formGroup]="formGroup">
-        <div class="input" *ngFor="let question of questions">
-          <app-question [question]="question" [form]="formGroup"></app-question>
-        </div>
-        <div class="buttonSubmit">
-          <button nbButton status="success" shape="round" type="submit">Submit</button>
-        </div>
-      </form>
-  </div>
-  </nb-card-body>
-</nb-card>
+    <span [ngSwitch]="showUrlInput">
+
+    <div *ngSwitchCase="true">
+      <input nbInput fullWidth type="text" required placeholder="URL"
+      [(ngModel)]="formUrl" name="formUrl">
+      <button nbButton status="success" (click)="onFindForm()">Find</button>
+    </div>
+    <nb-card *ngSwitchCase="false">
+    <nb-card-header class="center">
+      <h2>{{formTitle}}</h2>
+    </nb-card-header>
+    <nb-card-body>
+    <div class="center">
+      
+      <form (ngSubmit)="onSubmit()" [formGroup]="formGroup">
+          <div class="input" *ngFor="let question of questions">
+            <app-question [question]="question" [form]="formGroup"></app-question>
+          </div>
+          <div class="buttonSubmit">
+            <button nbButton status="success" shape="round" type="submit">Submit</button>
+          </div>
+        </form>
+    </div>
+    </nb-card-body>
+  </nb-card>
+</span>
 </nb-layout-column>
 
 </nb-layout>
