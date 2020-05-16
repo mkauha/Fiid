@@ -9,6 +9,9 @@ import { PreviewFormComponent } from '../preview-form/preview-form.component';
 import { EmojiQuestion } from '../forms/question-emoji';
 import { HttpService } from '../http.service';
 import { GeneratedForm } from '../forms/generated-form';
+import { v4 as uuidv4 } from 'uuid';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-formbuilder',
@@ -25,7 +28,10 @@ export class FormbuilderComponent implements OnInit {
   public showAddButtons = false;
   public showFormQuestionInput = false;
   public showGeneratedUrl = false;
-  public generatedUrl = 'http://localhost:3000/forms/0ae34a35-d281-4867-89c2-1e2d77d747b6';
+  public formUUID = '';
+  public baseUrl = 'http://localhost:4200/form/';
+  public baseApiUrl = 'http://localhost:3000/forms/';
+  public generatedUrl = `${this.baseUrl}0ae34a35-d281-4867-89c2-1e2d77d747b6`;
 
   public addButtonStatus = 'success';
   public addButtonIcon = 'plus';
@@ -49,7 +55,7 @@ export class FormbuilderComponent implements OnInit {
   public radioButtonStatus = 'success';
   public emojiButtonStatus = 'warning';
 
-  constructor(private qcs: QuestionControlService, private httpService: HttpService) {
+  constructor(private qcs: QuestionControlService, private httpService: HttpService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -243,23 +249,30 @@ export class FormbuilderComponent implements OnInit {
 
   onClickGenerateForm() {
     if (this.questions.length >= 1) {
+      this.formUUID = uuidv4();
       this.qcs.saveForm(new GeneratedForm(this.formTitle, new Date(), this.questions));
-      this.httpService.postGeneratedForm(this.qcs.getForm());
+      this.httpService.postGeneratedForm(this.formUUID, this.qcs.getForm());
       this.showGeneratedUrl = true;
+      this.generatedUrl = `${this.baseUrl}${this.formUUID}`;
+      console.log(this.generatedUrl);
     }
   }
 
   onGoToGeneratedUrl() {
     console.log(`Go to ${this.generatedUrl}`);
+    this.router.navigate(['/form'], { queryParams: { id: this.formUUID } });
   }
 
-  onCopyGeneratedUrl() {
+  onCopyGeneratedUrl(inputElement) {
     console.log(`Copy ${this.generatedUrl}`);
+    inputElement.select();
+    document.execCommand('copy');
+    inputElement.setSelectionRange(0, 0);
   }
 
   onModifyForm() {
+    this.httpService.deleteGeneratedForm(this.formUUID);
     this.showGeneratedUrl = false;
-    // delete previous form from backend
   }
 }
 

@@ -13,8 +13,10 @@
 
           <div *ngSwitchCase="true">
             <h1>Generated Form</h1>
-            <input status="basic" nbInput fieldSize="large" shape="round" fullWidth type="text" id="generatedUrl" name="generatedUrl" readonly [(ngModel)]="generatedUrl">
-            <button class="button" nbButton status='info' shape="round" (click)="onCopyGeneratedUrl()" ><nb-icon icon='copy'></nb-icon></button>
+            <input status="basic" nbInput fieldSize="large" shape="round" fullWidth type="text" id="generatedUrl" name="generatedUrl" readonly #userinput [(ngModel)]="generatedUrl">
+            <button class="button" nbButton status='info' shape="round" (click)="onCopyGeneratedUrl(userinput)" ><nb-icon icon='copy'></nb-icon></button>
+            <button nbButton status="success" shape="round" (click)="onGoToGeneratedUrl()"><nb-icon icon="external-link"></nb-icon>
+            </button>
           </div>
 
           <div *ngSwitchCase="false">
