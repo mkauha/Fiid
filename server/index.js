@@ -53,25 +53,31 @@ app.get('/forms', function (req, res) {
         data[i] = db.get(keys[i]);
     }
   res.json(data)
+  
 })
 
-app.get("/forms/:id([a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12})", function(req, res) {
+// TODO setup regex
+app.get("/forms/:id(*)", function(req, res) {
     var paramID = req.params.id
+    console.log(`GET with UUID: ${paramID}`);
     res.send(db.get(paramID));
 });
 
 app.post('/forms/', function(req, res) {
-    var UUID = uuidv4();
-    console.log(`PUT with UUID: ${UUID}`);
-    db.put(UUID, {form: req.body.form});
-
+    var paramID = req.body.id;
+    console.log(`PUT with UUID: ${paramID}`);
+    db.put(paramID, {form: req.body.form});
+    console.log(req.body.form);
     res.status(201);
     res.location("http://localhost:3000/forms/" + req.body.id);
     res.send();
+    console.log(db.keys());
 });
 
-app.delete("/forms/:id([a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12})", function(req, res) {
-    var paramID = Number(req.params.id)
+// TODO setup regex
+app.delete("/forms/:id(*)", function(req, res) {
+    var paramID = req.params.id;
+    console.log(`DEL with UUID: ${paramID}`);
     res.send(db.del(paramID));
 });
 
