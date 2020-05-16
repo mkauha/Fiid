@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { GeneratedForm } from './forms/generated-form';
-import { Form } from './forms/form';
 
 @Injectable({
   providedIn: 'root'
@@ -33,8 +32,4 @@ export class HttpService {
       console.log(response);
     });
   }
-}
-
-interface GeneratedFormResponse {
-  results: Form;
 }
