@@ -7,6 +7,8 @@ import { RadioQuestion } from '../forms/question-radio';
 import { TextareaQuestion } from '../forms/question-textarea';
 import { PreviewFormComponent } from '../preview-form/preview-form.component';
 import { EmojiQuestion } from '../forms/question-emoji';
+import { HttpService } from '../http.service';
+import { GeneratedForm } from '../forms/generated-form';
 
 @Component({
   selector: 'app-formbuilder',
@@ -45,7 +47,7 @@ export class FormbuilderComponent implements OnInit {
   public radioButtonStatus = 'success';
   public emojiButtonStatus = 'warning';
 
-  constructor(private qcs: QuestionControlService) {
+  constructor(private qcs: QuestionControlService, private httpService: HttpService) {
   }
 
   ngOnInit(): void {
@@ -145,7 +147,7 @@ export class FormbuilderComponent implements OnInit {
     this.reset();
     this.toggleFormQuestionInput();
     this.toggleAdd();
-    this.qcs.saveQuestions(this.formTitle, this.questions);
+    this.qcs.saveForm(new GeneratedForm(this.formTitle, new Date(), this.questions));
     this.form = this.qcs.getFormGroup();
     this.allowGeneration = this.questions.length >= 1;
   }
@@ -238,8 +240,9 @@ export class FormbuilderComponent implements OnInit {
   }
 
   onClickGenerateForm() {
-    if (this.questions.length > 1) {
-      this.qcs.saveQuestions(this.formTitle, this.questions);
+    if (this.questions.length >= 1) {
+      this.qcs.saveForm(new GeneratedForm(this.formTitle, new Date(), this.questions));
+      this.httpService.postGeneratedForm(this.qcs.getForm());
     }
   }
 }
