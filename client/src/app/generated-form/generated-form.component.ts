@@ -7,6 +7,7 @@ import { TextareaQuestion } from '../forms/question-textarea';
 import { RadioQuestion } from '../forms/question-radio';
 import { EmojiQuestion } from '../forms/question-emoji';
 import { HttpService } from '../http.service';
+import { GeneratedForm } from '../forms/generated-form';
 
 @Component({
   selector: 'app-generated-form',
@@ -15,9 +16,11 @@ import { HttpService } from '../http.service';
 })
 
 export class GeneratedFormComponent implements OnInit {
-  form: FormGroup;
+  formGroup: FormGroup;
   questions: QuestionBase[] = [];
   formTitle = ' ';
+  formDate = ' ';
+  formUrl = 'http://localhost:3000/forms/0ae34a35-d281-4867-89c2-1e2d77d747b6';
 
   constructor(private qcs: QuestionControlService, private httpService: HttpService) { }
 
@@ -25,16 +28,27 @@ export class GeneratedFormComponent implements OnInit {
 /*     this.questions = this.qcs.getQuestions();
     this.formTitle = this.qcs.getFormTitle();
     this.form = this.qcs.getFormGroup(); */
-    this.generateTextForm();
+    //this.generateTextForm();
+    //this.onFindForm();
   }
 
   onSubmit() {
-    console.log(this.form.value);
+    console.log(this.formGroup.value);
     console.log(this.questions);
-    this.httpService.postForm(this.form.value);
+    // this.httpService.postForm(this.form.value);
   }
 
-  generateTextForm() {
+  onFindForm() {
+    this.httpService.fetchForm((result) => {
+      this.questions = JSON.parse(JSON.stringify(result.form.questions));
+      this.formTitle = JSON.parse(JSON.stringify(result.form.title));
+      this.formDate = JSON.parse(JSON.stringify(result.form.date));
+      this.qcs.saveForm(new GeneratedForm(this.formTitle, new Date(this.formDate), this.questions));
+      this.formGroup = this.qcs.getFormGroup();
+    }, this.formUrl);
+  }
+
+/*   generateTextForm() {
     this.formTitle = 'Test form';
     const radioChoices: string[] = ['Option 1', 'Option 2', 'Option 3'];
     this.questions.push(new TextboxQuestion({id: 1, key: 'firstname', label: 'Firstname', textboxtype: 'string', required: true}));
@@ -49,7 +63,7 @@ export class GeneratedFormComponent implements OnInit {
       required: false
     }));
     this.questions.push(new EmojiQuestion({id: 5, key: 'happy', label: 'Happy?', required: true}));
-    this.form = this.generateTestFormGroup();
+    this.formGroup = this.generateTestFormGroup();
   }
 
   generateTestFormGroup(): FormGroup {
@@ -63,7 +77,6 @@ export class GeneratedFormComponent implements OnInit {
         }
     }
     return new FormGroup(group);
-  }
-
+  } */
 
 }
