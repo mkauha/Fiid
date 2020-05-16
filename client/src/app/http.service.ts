@@ -26,9 +26,16 @@ export class HttpService {
     }); */
   }
 
-  postGeneratedForm(generatedForm: GeneratedForm) {
-    let postedForm = {id: 1, form: generatedForm};
+  postGeneratedForm(UUID: string, generatedForm: GeneratedForm) {
+    let postedForm = {id: UUID, form: generatedForm};
+    console.log(postedForm)
     this.http.post<GeneratedForm>(this.postUrl, postedForm, {observe: 'response'}).subscribe(response => {
+      console.log(response);
+    });
+  }
+
+  deleteGeneratedForm(UUID: string) {
+    this.http.delete(this.postUrl + UUID).subscribe(response => {
       console.log(response);
     });
   }
