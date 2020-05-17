@@ -18,6 +18,7 @@ import { HomeComponent } from './home/home.component';
 import { PreviewFormComponent } from './preview-form/preview-form.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpService } from './http.service';
+import { ResultsComponent } from './results/results.component';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { HttpService } from './http.service';
     FormbuilderComponent,
     HomeComponent,
     PreviewFormComponent,
+    ResultsComponent,
   ],
   imports: [
     BrowserModule,
