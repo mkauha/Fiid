@@ -56,8 +56,6 @@ export class GeneratedFormComponent implements OnInit {
       this.formDate = JSON.parse(JSON.stringify(result.form.date));
       this.qcs.saveForm(new GeneratedForm(this.formTitle, new Date(this.formDate), this.questions));
       this.formGroup = this.qcs.getFormGroup();
-
-
     }, url);
 
   }
@@ -71,39 +69,7 @@ export class GeneratedFormComponent implements OnInit {
     this.formUUID = paramArr[1];
     this.formUrl = `${this.baseUrl}${this.formUUID}`;
     this.router.navigate(['/form'], { queryParams: { id: this.formUUID } });
-
-    this.fetchForm(this.formUrl);
+    this.showUrlInput = false;
   }
-
-/*   generateTextForm() {
-    this.formTitle = 'Test form';
-    const radioChoices: string[] = ['Option 1', 'Option 2', 'Option 3'];
-    this.questions.push(new TextboxQuestion({id: 1, key: 'firstname', label: 'Firstname', textboxtype: 'string', required: true}));
-    this.questions.push(new TextboxQuestion({id: 2, key: 'lastname', label: 'Lastname', textboxtype: 'string', required: true}));
-    this.questions.push(new TextareaQuestion({id: 3, key: 'story', label: 'Story of your life', rows: 3, required: true}));
-    this.questions.push(new RadioQuestion({
-      id: 4,
-      key: 'happiness',
-      label: 'Pick one?',
-      choiceAmount: radioChoices.length,
-      choices: radioChoices,
-      required: false
-    }));
-    this.questions.push(new EmojiQuestion({id: 5, key: 'happy', label: 'Happy?', required: true}));
-    this.formGroup = this.generateTestFormGroup();
-  }
-
-  generateTestFormGroup(): FormGroup {
-    const group: any = {};
-
-    for (const question of this.questions) {
-        if (question.required) {
-            group[question.key] = new FormControl('', Validators.required);
-        } else {
-            group[question.key] = new FormControl();
-        }
-    }
-    return new FormGroup(group);
-  } */
 
 }

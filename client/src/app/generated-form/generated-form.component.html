@@ -14,7 +14,7 @@
     <nb-card-body>
     <div class="center">
       
-      <form (ngSubmit)="onSubmit()" [formGroup]="formGroup">
+      <form *ngIf="formGroup" (ngSubmit)="onSubmit()" [formGroup]="formGroup">
           <div class="input" *ngFor="let question of questions">
             <app-question [question]="question" [form]="formGroup"></app-question>
           </div>

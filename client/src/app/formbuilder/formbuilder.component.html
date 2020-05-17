@@ -22,31 +22,8 @@
           <div *ngSwitchCase="false">
             <input nbInput fieldSize="giant" shape="round" type="text" required placeholder="Form title"
               [(ngModel)]="formTitle" name="formTitle">
-        
-<!-- 
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Question</th>
-            <th>Type</th>
-            <th>Required</th>
-            <th> </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let question of questions">
-          <td>{{question.label}}</td>
-          <td *ngIf="question.controlType === 'textbox'"><nb-icon icon="minus"></nb-icon></td>
-          <td *ngIf="question.controlType === 'textarea'"><nb-icon icon="menu"></nb-icon></td>
-          <td *ngIf="question.controlType === 'radio'"><nb-icon icon="smiling-face"></nb-icon></td>
-          <td><span *ngIf="question.required;else not_required"><nb-icon icon="checkmark"></nb-icon></span></td>
-          <ng-template #not_required> </ng-template>
-          <td><button nbButton ghost (click)="delete(question)"><nb-icon icon='trash' status="danger"></nb-icon></button></td>
-          </tr>
-        </tbody>
-      </table> -->
 
-      <app-preview-form (onDeleteClicked)="delete($event)"[questions]=questions [form]=form [formTitle]=formTitle></app-preview-form>
+      <app-preview-form *ngIf="form" (onDeleteClicked)="delete($event)"[questions]=questions [form]=form [formTitle]=formTitle></app-preview-form>
 
       <div class="center">
       <button class="button" nbButton status={{addButtonStatus}} shape="round" (click)="onAddElement()" ><nb-icon icon={{addButtonIcon}}></nb-icon></button>
