@@ -1,1 +1,32 @@
-<p>results works!</p>
+<nb-layout>
+    
+    <nb-layout-header fixed>
+      <h1>Results</h1>
+    </nb-layout-header>
+  
+    <nb-layout-column>
+<div>
+<nb-card size="medium">
+    <nb-card-header>
+        <h2>{{formTitle}}</h2>
+        <h6>{{formUUID}}</h6>
+        <p> {{formDate}}</p>
+    </nb-card-header>
+    <nb-accordion multi>
+        <nb-accordion-item *ngFor="let question of questions; let i = index">
+         <nb-accordion-item-header>{{question.label}} ({{question.results.length}})</nb-accordion-item-header>
+         <nb-accordion-item-body>
+            <nb-list>
+                <nb-list-item *ngFor="let result of question.results; let i = index">
+                  {{i}}: {{result}}
+                </nb-list-item>
+              </nb-list>
+         </nb-accordion-item-body>
+        </nb-accordion-item>
+       </nb-accordion>
+  </nb-card>
+
+</div>
+</nb-layout-column>
+
+</nb-layout>
