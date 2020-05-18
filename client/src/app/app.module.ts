@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule, NbLayoutModule, NbButtonModule, NbInputModule, NbCheckboxModule, NbToggleModule, NbCardModule, NbRadioModule, NbListModule, NbTabsetModule, NbIconLibraries } from '@nebular/theme';
+import { NbThemeModule, NbLayoutModule, NbButtonModule, NbInputModule, NbCheckboxModule, NbToggleModule, NbCardModule, NbRadioModule, NbListModule, NbTabsetModule, NbIconLibraries, NbAccordionModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { NbIconModule } from '@nebular/theme';
 import { AppRoutingModule } from './app-routing.module';
@@ -51,6 +51,7 @@ import { ResultsComponent } from './results/results.component';
     NbRadioModule,
     NbListModule,
     NbTabsetModule,
+    NbAccordionModule,
   ],
   providers: [QuestionControlService, NbIconLibraries, HttpService],
   bootstrap: [AppComponent]
