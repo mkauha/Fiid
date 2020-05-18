@@ -13,13 +13,14 @@
             <h1>Generated Form</h1>
             <h6>{{formUUID}}</h6>
             <input status="basic" nbInput fieldSize="large" shape="round" fullWidth type="text" id="generatedUrl" name="generatedUrl" style="text-align:center" readonly #userinput [(ngModel)]="generatedUrl">
-            <button class="button" nbButton status='info' shape="round" (click)="onCopyGeneratedUrl(userinput)" ><nb-icon icon='copy'></nb-icon></button>
-            <button nbButton status="success" shape="round" (click)="onGoToGeneratedUrl()"><nb-icon icon="external-link"></nb-icon>
+            <button class="button" nbButton status="info" shape="round" (click)="onGoToResults()"><nb-icon icon="activity"></nb-icon></button>
+            <button class="button" nbButton status='primary' shape="round" (click)="onCopyGeneratedUrl(userinput)" ><nb-icon icon='copy'></nb-icon></button>
+            <button class="button" nbButton status="success" shape="round" (click)="onGoToGeneratedUrl()"><nb-icon icon="external-link"></nb-icon>
             </button>
           </div>
 
           <div *ngSwitchCase="false">
-            <input nbInput fieldSize="giant" shape="round" type="text" required placeholder="Form title"
+            <input nbInput fieldSize="giant" shape="round" type="text" placeholder="Form title"
               [(ngModel)]="formTitle" name="formTitle" (change)=checkTitleValidity()>
 
       <app-preview-form *ngIf="form" (onDeleteClicked)="delete($event)"[questions]=questions [form]=form [formTitle]=formTitle></app-preview-form>

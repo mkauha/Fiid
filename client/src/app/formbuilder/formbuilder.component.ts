@@ -274,6 +274,10 @@ export class FormbuilderComponent implements OnInit {
     this.router.navigate(['/form'], { queryParams: { id: this.formUUID } });
   }
 
+  onGoToResults() {
+    this.router.navigate(['/results'], { queryParams: { id: this.formUUID } });
+  }
+
   onCopyGeneratedUrl(inputElement) {
     inputElement.select();
     document.execCommand('copy');
