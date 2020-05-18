@@ -19,6 +19,7 @@ export class GeneratedFormComponent implements OnInit {
   formUUID = '';
   formTitle = ' ';
   formDate = ' ';
+  formResults: string[] = [];
   baseUrl = 'http://localhost:3000/forms/';
   formUrl = 'http://localhost:3000/forms/0ae34a35-d281-4867-89c2-1e2d77d747b6';
 
@@ -31,9 +32,9 @@ export class GeneratedFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      console.log(params);
+      this.formUUID = params.id;
       this.formUrl = `${this.baseUrl}${params.id}`;
-      console.log(this.formUrl);
+      console.log(`Generated post url: ${this.formUrl}`);
 
       this.fetchForm(this.formUrl);
 
@@ -41,9 +42,18 @@ export class GeneratedFormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.formGroup.value);
-    console.log(this.questions);
-    // this.httpService.postForm(this.form.value);
+    let i = 0;
+    this.formResults = this.formGroup.value;
+    // tslint:disable-next-line: forin
+    for (const key in this.formResults) {
+      const value = this.formResults[key];
+      this.questions[i].results.push(value);
+      i++;
+    }
+
+    this.qcs.saveForm(new GeneratedForm(this.formTitle, this.formDate, this.questions, this.formResults));
+    //this.httpService.deleteGeneratedForm(this.formUUID);
+    this.httpService.postGeneratedForm(this.formUUID, this.qcs.getForm());
   }
 
   fetchForm(url: string) {
@@ -54,7 +64,7 @@ export class GeneratedFormComponent implements OnInit {
       this.questions = JSON.parse(JSON.stringify(result.form.questions));
       this.formTitle = JSON.parse(JSON.stringify(result.form.title));
       this.formDate = JSON.parse(JSON.stringify(result.form.date));
-      this.qcs.saveForm(new GeneratedForm(this.formTitle, new Date(this.formDate), this.questions));
+      this.qcs.saveForm(new GeneratedForm(this.formTitle, this.formDate, this.questions, this.formResults));
       this.formGroup = this.qcs.getFormGroup();
     }, url);
 
@@ -63,9 +73,9 @@ export class GeneratedFormComponent implements OnInit {
   onFindForm() {
 
     const urlArr = this.formUrl.split('/');
-    console.log(urlArr)
+    console.log(urlArr);
     const paramArr = urlArr[3].split('=');
-    console.log(paramArr)
+    console.log(paramArr);
     this.formUUID = paramArr[1];
     this.formUrl = `${this.baseUrl}${this.formUUID}`;
     this.router.navigate(['/form'], { queryParams: { id: this.formUUID } });

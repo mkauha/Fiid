@@ -43,6 +43,7 @@ export class FormbuilderComponent implements OnInit {
   public questionKey = '';
   public questionLabel = '';
   public questionisRequired = false;
+  public questionResults: string[] = [];
 
   public showChoiceInput = false;
   public radioChoices = ['', '', ''];
@@ -152,10 +153,12 @@ export class FormbuilderComponent implements OnInit {
         break;
     }
 
+    const date = new Date();
+    const dateMonth = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
     this.reset();
     this.toggleFormQuestionInput();
     this.toggleAdd();
-    this.qcs.saveForm(new GeneratedForm(this.formTitle, new Date(), this.questions));
+    this.qcs.saveForm(new GeneratedForm(this.formTitle, dateMonth, this.questions, this.questionResults));
     this.form = this.qcs.getFormGroup();
     this.allowGeneration = this.questions.length >= 1;
   }
@@ -186,9 +189,10 @@ export class FormbuilderComponent implements OnInit {
       id: this.questionID++,
       key: this.questionLabel.toLowerCase(),
       label: this.questionLabel,
-      // make textboxtype customizable
       textboxtype: 'string',
-      required: this.questionisRequired}),
+      required: this.questionisRequired,
+      results: this.questionResults,
+     }),
     );
   }
 
@@ -197,9 +201,10 @@ export class FormbuilderComponent implements OnInit {
       id: this.questionID++,
       key: this.questionLabel.toLowerCase(),
       label: this.questionLabel,
-      // make rows customizable
       rows: 3,
-      required: this.questionisRequired}),
+      required: this.questionisRequired,
+      results: this.questionResults,
+    }),
     );
   }
 
@@ -219,9 +224,10 @@ export class FormbuilderComponent implements OnInit {
       // make optionAmount customizable
       choiceAmount: this.radioChoices.length,
       choices: this.radioChoices,
-      required: this.questionisRequired}),
+      required: this.questionisRequired,
+      results: this.questionResults,
+    }),
     );
-
   }
 
   createEmoji() {
@@ -229,7 +235,9 @@ export class FormbuilderComponent implements OnInit {
       id: this.questionID++,
       key: this.questionLabel.toLowerCase(),
       label: this.questionLabel,
-      required: this.questionisRequired}),
+      required: this.questionisRequired,
+      results: this.questionResults,
+    }),
     );
   }
 
@@ -250,11 +258,13 @@ export class FormbuilderComponent implements OnInit {
   onClickGenerateForm() {
     if (this.questions.length >= 1) {
       this.formUUID = uuidv4();
-      this.qcs.saveForm(new GeneratedForm(this.formTitle, new Date(), this.questions));
+      const date = new Date();
+      const dateMonth = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
+      this.qcs.saveForm(new GeneratedForm(this.formTitle, dateMonth, this.questions, this.questionResults));
       this.httpService.postGeneratedForm(this.formUUID, this.qcs.getForm());
       this.showGeneratedUrl = true;
       this.generatedUrl = `${this.baseUrl}${this.formUUID}`;
-      console.log(this.generatedUrl);
+      console.log(`Build post: ${this.generatedUrl}`);
     }
   }
 

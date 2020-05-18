@@ -10,6 +10,7 @@ export interface Options {
     key?: string;
     // Is it required or not?
     required?: boolean;
+    results?: string[];
 }
 
 export class QuestionBase {
@@ -19,6 +20,7 @@ export class QuestionBase {
     controlTypeLabel: string;
     key: string;
     required: boolean;
+    results: string[];
 
     constructor(options: Options) {
         this.id = options.id;
@@ -27,5 +29,6 @@ export class QuestionBase {
         this.controlTypeLabel = options.controlTypeLabel;
         this.key = options.key;
         this.required = options.required;
+        this.results = options.results;
     }
 }

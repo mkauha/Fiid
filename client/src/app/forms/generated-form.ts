@@ -3,11 +3,13 @@ import { QuestionBase } from './question-base';
 export class GeneratedForm {
     title: string;
     questions: QuestionBase[];
-    date: Date;
+    date: string;
+    results: string[];
 
-    constructor(title: string, date: Date, questions: QuestionBase[]) {
+    constructor(title: string, date: string, questions: QuestionBase[], results: string[]) {
         this.title = title;
         this.date = date;
         this.questions = questions;
+        this.results = this.results;
     }
 }
