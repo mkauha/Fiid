@@ -13,30 +13,43 @@ app.use( bodyParser.json() );
 app.use(cors())
 
 var testID = '0ae34a35-d281-4867-89c2-1e2d77d747b6';
-db.put(testID, {form: {
-    title: "Form title",
-    date: "Date Fri May 15 2020 15:32:33 GMT+0300 (Eastern European Summer Time)",
-    questions: [
-         {
-            controlType: "textbox",
-            controlTypeLabel: "Short",
-            id: 0,
-            key: "shortquestion",
-            label: "Short question",
-            required: true,
-            textboxtype: "string",
-        },
-         {
-            controlType: "textarea",
-            controlTypeLabel: "Long",
-            id: 1,
-            key: "longquestion",
-            label: "Long question",
-            required: true,
-            rows: 3,
-        }
-    ],
-}});
+db.put(testID, {
+    form: {
+        title: "Form title",
+        date: "Date Fri May 15 2020 15:32:33 GMT+0300 (Eastern European Summer Time)",
+        questions: [
+            {
+                controlType: "textbox",
+                controlTypeLabel: "Short",
+                id: 0,
+                key: "shortquestion",
+                label: "Short question",
+                required: true,
+                textboxtype: "string",
+                results: [
+                    "Short answer 1",
+                    "Short answer 2",
+                    "Short answer 3",
+                ]
+            },
+            {
+                controlType: "textarea",
+                controlTypeLabel: "Long",
+                id: 1,
+                key: "longquestion",
+                label: "Long question",
+                required: true,
+                rows: 3,
+                results: [
+                    "Long answer 1",
+                    "Long answer 2",
+                    "Long answer 3",
+                ]
+            }
+        ],
+    },
+});
+
 
 var keys = db.keys();
 var data = [];
@@ -54,12 +67,12 @@ app.get('/forms', function (req, res) {
     }
   res.json(data)
   
-})
+});
 
 // TODO setup regex
 app.get("/forms/:id(*)", function(req, res) {
     var paramID = req.params.id
-    console.log(`GET with UUID: ${paramID}`);
+    console.log(`GET forms with UUID: ${paramID}`);
     res.send(db.get(paramID));
 });
 
