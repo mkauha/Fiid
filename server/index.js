@@ -15,37 +15,69 @@ app.use(cors())
 var testID = '0ae34a35-d281-4867-89c2-1e2d77d747b6';
 db.put(testID, {
     form: {
-        title: "Form title",
-        date: "Date Fri May 15 2020 15:32:33 GMT+0300 (Eastern European Summer Time)",
+        title: "Asiakaspalaute",
+        date: "15.5.2020",
         questions: [
             {
                 controlType: "textbox",
                 controlTypeLabel: "Short",
                 id: 0,
-                key: "shortquestion",
-                label: "Short question",
+                key: "nimi",
+                label: "Nimi",
                 required: true,
                 textboxtype: "string",
                 results: [
-                    "Short answer 1",
-                    "Short answer 2",
-                    "Short answer 3",
+                    "Jaska",
+                    "Erkki",
+                    "Pekka",
                 ]
             },
             {
                 controlType: "textarea",
                 controlTypeLabel: "Long",
                 id: 1,
-                key: "longquestion",
-                label: "Long question",
+                key: "vapaasana",
+                label: "Vapaa sana",
                 required: true,
                 rows: 3,
                 results: [
-                    "Long answer 1",
-                    "Long answer 2",
-                    "Long answer 3",
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                    "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo",
+                    "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt",
                 ]
-            }
+            },
+            {
+                controlType: "radio",
+                controlTypeLabel: "Radio",
+                id: 2,
+                key: "valitseparas",
+                label: "Valitse paras",
+                required: true,
+                results: [
+                    "A",
+                    "A",
+                    "B",
+                ],
+                choiceAmount: 3,
+                choices: [
+                    "A",
+                    "B",
+                    "C"
+                ]
+            },
+            {
+                controlType: "emoji",
+                controlTypeLabel: "Emoji",
+                id: 3,
+                key: "tyytyväisyys",
+                label: "Tyytyväisyys",
+                required: true,
+                results: [
+                    "2",
+                    "3",
+                    "1",
+                ]
+            },
         ],
     },
 });
