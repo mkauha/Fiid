@@ -18,22 +18,3 @@
 .requiredToggle {
     margin-left: 10px;
 }
-
-.table {
-    margin: auto;
-    margin-top: 30px;
-    margin-bottom: 50px;
-    width: 50%;
-    padding: 10px;
-    text-align: center;
-    font-size: medium;
-}
-
-hr {
-    display: block;
-    height: 1px;
-    border: 0;
-    border-top: 1px solid #ccc;
-    margin: 1em 0;
-    padding: 0;
-}

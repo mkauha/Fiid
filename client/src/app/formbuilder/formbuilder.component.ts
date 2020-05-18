@@ -23,7 +23,8 @@ export class FormbuilderComponent implements OnInit {
   public questions: QuestionBase[] = [];
   public form: FormGroup;
 
-  public allowGeneration = false;
+  public titleValid = false;
+  public formValid = false;
   public formTitle = '';
   public showAddButtons = false;
   public showFormQuestionInput = false;
@@ -56,12 +57,9 @@ export class FormbuilderComponent implements OnInit {
   public radioButtonStatus = 'success';
   public emojiButtonStatus = 'warning';
 
-  constructor(private qcs: QuestionControlService, private httpService: HttpService, private router: Router) {
-  }
+  constructor(private qcs: QuestionControlService, private httpService: HttpService, private router: Router) {}
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   toggleAdd() {
     this.showAddButtons = !this.showAddButtons;
@@ -160,7 +158,8 @@ export class FormbuilderComponent implements OnInit {
     this.toggleAdd();
     this.qcs.saveForm(new GeneratedForm(this.formTitle, dateMonth, this.questions, this.questionResults));
     this.form = this.qcs.getFormGroup();
-    this.allowGeneration = this.questions.length >= 1;
+
+    this.formValid = this.questions.length >= 1;
   }
 
   addRadioChoice() {
@@ -252,7 +251,11 @@ export class FormbuilderComponent implements OnInit {
       this.questions.splice(removalIndex, 1);
     }
 
-    this.allowGeneration = this.questions.length >= 1;
+    this.formValid = this.questions.length >= 1;
+  }
+
+  checkTitleValidity() {
+    this.titleValid = this.formTitle.length >= 1 && this.formTitle !== ' ';
   }
 
   onClickGenerateForm() {
@@ -264,17 +267,14 @@ export class FormbuilderComponent implements OnInit {
       this.httpService.postGeneratedForm(this.formUUID, this.qcs.getForm());
       this.showGeneratedUrl = true;
       this.generatedUrl = `${this.baseUrl}${this.formUUID}`;
-      console.log(`Build post: ${this.generatedUrl}`);
     }
   }
 
   onGoToGeneratedUrl() {
-    console.log(`Go to ${this.generatedUrl}`);
     this.router.navigate(['/form'], { queryParams: { id: this.formUUID } });
   }
 
   onCopyGeneratedUrl(inputElement) {
-    console.log(`Copy ${this.generatedUrl}`);
     inputElement.select();
     document.execCommand('copy');
     inputElement.setSelectionRange(0, 0);
