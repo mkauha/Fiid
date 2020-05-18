@@ -1,16 +1,23 @@
 {
-  "name": "feedel",
+  "name": "fiid",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node index.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "postinstall": "ng build --aot --prod"
+  },
+  "engines": {
+    "node": "12.14.0",
+    "npm": "6.13.4"
   },
   "private": true,
   "dependencies": {
+    "@angular/cli": "~9.0.5",
+    "@angular/compiler-cli": "~9.0.5",
     "@angular/animations": "~9.0.5",
     "@angular/cdk": "^9.0.0",
     "@angular/common": "~9.0.5",
@@ -30,7 +37,8 @@
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "uuid": "^8.0.0",
-    "zone.js": "~0.10.2"
+    "zone.js": "~0.10.2",
+    "typescript": "~3.7.5"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.900.5",
