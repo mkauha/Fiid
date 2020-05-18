@@ -6,19 +6,25 @@
     </nb-layout-header>
   
     <nb-layout-column>
-        <div  class="center">
-            <button class="center" nbButton status="success" shape="round" routerLink="/new" class="btn btn-success">New form<nb-icon icon="file-add"></nb-icon></button>
-        </div>
-        <div  class="center">
-            <button class="center" nbButton status="info" shape="round" class="btn btn-success" (click)="showFormResultsInput = !showFormResultsInput">
-                Results<nb-icon icon="activity"></nb-icon>
-            </button>
-        </div>
-        <div *ngIf="showFormResultsInput" class="center">
-            <h3>Find form results</h3>
-            <input status="basic" nbInput fieldSize="medium" shape="round" type="text" id="formUrl" name="formUrl" placeholder="Form ID" [(ngModel)]="formUUID">
-            <button nbButton status="success" shape="round" (click)="onGoToResults()"><nb-icon icon="chevron-right"></nb-icon>
-            </button>
+        <div class="center">
+            <div>
+                <input status="success" nbInput fieldSize="medium" shape="round" type="text" id="formUrl" name="formUrl" placeholder="Form ID" [(ngModel)]="formUUID" class="button">
+                <button nbButton status="success" shape="round" (click)="onGoToForm()"><nb-icon icon="search"></nb-icon></button>
+            </div>
+
+            <div>
+                <button class="center" nbButton status="success" shape="round" routerLink="/new" class="button" >New form<nb-icon icon="file-add"></nb-icon></button>
+            </div>
+            <div>
+                <button class="center" nbButton status="info" shape="round" class="button" (click)="showFormResultsInput = !showFormResultsInput">
+                    Results<nb-icon icon="activity"></nb-icon>
+                </button>
+            </div>
+            <div *ngIf="showFormResultsInput">
+                <h3>Find form results</h3>
+                <input status="info" nbInput fieldSize="medium" shape="round" type="text" id="formUrl" name="formUrl" placeholder="Form ID" [(ngModel)]="formUUID">
+                <button nbButton status="info" shape="round" (click)="onGoToResults()" class="button"><nb-icon icon="search" ></nb-icon></button>
+            </div>
         </div>
     </nb-layout-column>
 

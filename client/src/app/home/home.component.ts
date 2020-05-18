@@ -20,4 +20,8 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/results'], { queryParams: { id: this.formUUID } });
   }
 
+  onGoToForm() {
+    this.router.navigate(['/form'], { queryParams: { id: this.formUUID } });
+  }
+
 }
