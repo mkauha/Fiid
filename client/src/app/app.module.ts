@@ -30,6 +30,7 @@ import { PreviewFormComponent } from './preview-form/preview-form.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpService } from './http.service';
 import { ResultsComponent } from './results/results.component';
+import { DivEmojiSelectComponent } from './div-emoji-select/div-emoji-select.component';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { ResultsComponent } from './results/results.component';
     HomeComponent,
     PreviewFormComponent,
     ResultsComponent,
+    DivEmojiSelectComponent,
   ],
   imports: [
     BrowserModule,

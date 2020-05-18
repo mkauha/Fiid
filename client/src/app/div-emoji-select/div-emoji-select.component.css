@@ -1,0 +1,19 @@
+.emoji-icon {
+    font-size: 2.5rem;
+    margin: 5px;
+}
+
+.emoji-radio [type=radio] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.emoji-radio [type=radio] + fa-icon {
+    cursor: pointer;
+}
+
+.emoji-radio [type=radio]:checked + fa-icon {
+    
+}
