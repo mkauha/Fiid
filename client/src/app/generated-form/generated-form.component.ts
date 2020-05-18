@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup} from '@angular/forms';
 import { QuestionControlService } from '../question-control.service';
 import { QuestionBase } from '../forms/question-base';
 import { HttpService } from '../http.service';
@@ -24,6 +24,7 @@ export class GeneratedFormComponent implements OnInit {
   formUrl = 'http://localhost:3000/forms/0ae34a35-d281-4867-89c2-1e2d77d747b6';
 
   public showUrlInput = false;
+  public formState = FormState.Open;
 
   constructor(private qcs: QuestionControlService,
               private httpService: HttpService,
@@ -52,14 +53,14 @@ export class GeneratedFormComponent implements OnInit {
     }
 
     this.qcs.saveForm(new GeneratedForm(this.formTitle, this.formDate, this.questions, this.formResults));
-    //this.httpService.deleteGeneratedForm(this.formUUID);
     this.httpService.postGeneratedForm(this.formUUID, this.qcs.getForm());
+    this.formState = FormState.Submitted;
   }
 
   fetchForm(url: string) {
     this.httpService.fetchForm((result) => {
       if (result === null) {
-        this.showUrlInput = true;
+        this.formState = FormState.NotFound;
       }
       this.questions = JSON.parse(JSON.stringify(result.form.questions));
       this.formTitle = JSON.parse(JSON.stringify(result.form.title));
@@ -82,4 +83,10 @@ export class GeneratedFormComponent implements OnInit {
     this.showUrlInput = false;
   }
 
+}
+
+enum FormState {
+  Open = 0,
+  Submitted = 1,
+  NotFound = 2,
 }

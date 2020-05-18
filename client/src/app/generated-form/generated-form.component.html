@@ -1,15 +1,13 @@
 <nb-layout>
   <nb-layout-column>
-    <span [ngSwitch]="showUrlInput">
+    <div [ngSwitch]="formState">
 
-    <div *ngSwitchCase="true">
-      <input nbInput fullWidth type="text" required placeholder="URL"
-      [(ngModel)]="formUrl" name="formUrl">
-      <button nbButton status="success" (click)="onFindForm()">Find</button>
-    </div>
-    <nb-card *ngSwitchCase="false">
+
+
+    <nb-card *ngSwitchCase="0">
     <nb-card-header class="center">
       <h2>{{formTitle}}</h2>
+      <p>{{formDate}}</p>
     </nb-card-header>
     <nb-card-body>
     <div class="center">
@@ -19,13 +17,27 @@
             <app-question [question]="question" [form]="formGroup"></app-question>
           </div>
           <div class="buttonSubmit">
-            <button nbButton status="success" shape="round" type="submit">Submit</button>
+            <button nbButton status="success" [disabled]="!formGroup.valid" shape="round" type="submit">Submit</button>
           </div>
         </form>
     </div>
     </nb-card-body>
   </nb-card>
-</span>
+  
+
+
+  <div *ngSwitchCase="1" class="center">
+    <h4>Answers were submitted</h4>
+    <h4>Thank you!</h4>
+    <button nbButton status="info" shape="round" routerLink="/">You're welcome</button>
+  </div>
+
+  <div *ngSwitchCase="2">
+    <input nbInput fullWidth type="text" required placeholder="URL" [(ngModel)]="formUrl" name="formUrl">
+    <button nbButton status="success" (click)="onFindForm()">Find</button>
+  </div>
+
+</div>
 </nb-layout-column>
 
 </nb-layout>
