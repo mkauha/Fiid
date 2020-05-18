@@ -2,23 +2,49 @@
     
     <nb-layout-header fixed>
       <h1>Results</h1>
+      <button nbButton status="info" routerLink="/">Home</button>
     </nb-layout-header>
   
     <nb-layout-column>
 <div>
 <nb-card size="medium">
     <nb-card-header>
-        <h2>{{formTitle}}</h2>
-        <h6>{{formUUID}}</h6>
+        <p>{{formUUID}}</p>
         <p> {{formDate}}</p>
+        <h2>{{formTitle}}</h2>
     </nb-card-header>
     <nb-accordion multi>
         <nb-accordion-item *ngFor="let question of questions; let i = index">
-         <nb-accordion-item-header>{{question.label}} ({{question.results.length}})</nb-accordion-item-header>
-         <nb-accordion-item-body>
+         <nb-accordion-item-header>
+            <span [ngSwitch]="question.controlType">
+            <nb-icon *ngSwitchCase="textbox" icon="minus"></nb-icon>
+            <nb-icon *ngSwitchCase="textarea" icon="menu"></nb-icon>
+            <nb-icon *ngSwitchCase="radio" icon="more-vertical"></nb-icon>
+            <nb-icon *ngSwitchCase="emoji" icon="smiling-face"></nb-icon>
+             {{question.label}} ({{question.results.length}})
+          </span>
+          </nb-accordion-item-header>
+           <nb-accordion-item-body>
             <nb-list>
                 <nb-list-item *ngFor="let result of question.results; let i = index">
-                  {{i}}: {{result}}
+                  <div [ngSwitch]="question.controlType">
+                    <div *ngSwitchCase="emoji">
+                      <div [ngSwitch]="result">
+                        <div *ngSwitchCase="1">
+                          {{i}}: <fa-icon class="emoji-icon" [icon]="faFrown" fa-lg [styles]="{'color': faFrownDefaultColor}"></fa-icon>
+                        </div>
+                        <div *ngSwitchCase="2">
+                          {{i}}: <fa-icon class="emoji-icon" [icon]="faMeh" fa-lg [styles]="{'color': faMehDefaultColor}"></fa-icon>
+                        </div>
+                        <div *ngSwitchCase="3">
+                          {{i}}: <fa-icon class="emoji-icon" [icon]="faSmile" fa-lg [styles]="{'color': faSmileDefaultColor}"></fa-icon>
+                        </div>
+                      </div>
+                    </div>
+                    <div *ngSwitchDefault>
+                      {{i}}: {{result}}
+                    </div>
+                  </div>
                 </nb-list-item>
               </nb-list>
          </nb-accordion-item-body>

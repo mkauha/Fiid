@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpService } from '../http.service';
 import { QuestionBase } from '../forms/question-base';
+import { faSmile, faMeh, faFrown } from '@fortawesome/free-regular-svg-icons';
 
 @Component({
   selector: 'app-results',
@@ -14,8 +15,22 @@ export class ResultsComponent implements OnInit {
   formDate = ' ';
   questions: QuestionBase[] = [];
   formResults = [];
+  questionIcon = '';
   baseUrl = 'http://localhost:3000/forms/';
   formUrl = 'http://localhost:3000/forms/0ae34a35-d281-4867-89c2-1e2d77d747b6';
+
+  faFrown = faFrown;
+  faMeh = faMeh;
+  faSmile = faSmile;
+  faFrownDefaultColor = '#FF3A6C';
+  faMehDefaultColor = '#FFA538';
+  faSmileDefaultColor = '#00D390';
+  
+  textbox = 'textbox';
+  textarea = 'textarea';
+  radio = 'radio';
+  emoji = 'emoji';
+
 
   constructor(private route: ActivatedRoute, private router: Router, private httpService: HttpService) { }
 
@@ -26,10 +41,9 @@ export class ResultsComponent implements OnInit {
       console.log(`Results fetch id: ${this.formUUID}`);
       this.formUrl = `${this.baseUrl}${params.id}`;
       console.log(`Results fetch url: ${this.formUrl}`);
-
-      this.fetchForm(this.formUrl);
-
     });
+
+    this.fetchForm(this.formUrl);
   }
 
   fetchForm(url: string) {
@@ -41,7 +55,6 @@ export class ResultsComponent implements OnInit {
       for (const question of this.questions) {
         this.formResults.push(question.results);
       }
-      console.log(this.formResults);
     }, url);
 
   }
