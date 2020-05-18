@@ -16,10 +16,10 @@
         </div>
         <div *ngIf="showFormResultsInput" class="center">
             <h3>Find form results</h3>
-            <input status="basic" nbInput fullWidth fieldSize="large" shape="round" type="text" id="formUrl" name="formUrl" placeholder="Form ID" [(ngModel)]="formUUID">
+            <input status="basic" nbInput fieldSize="medium" shape="round" type="text" id="formUrl" name="formUrl" placeholder="Form ID" [(ngModel)]="formUUID">
             <button nbButton status="success" shape="round" (click)="onGoToResults()"><nb-icon icon="chevron-right"></nb-icon>
             </button>
-          </div>
+        </div>
     </nb-layout-column>
 
     <nb-layout-footer fixed>
