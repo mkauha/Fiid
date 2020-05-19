@@ -36,7 +36,6 @@ export class GeneratedFormComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.formUUID = params.id;
       this.formUrl = `${this.baseUrl}${params.id}`;
-      console.log(`Generated post url: ${this.formUrl}`);
 
       this.fetchForm(this.formUrl);
 
@@ -73,11 +72,8 @@ export class GeneratedFormComponent implements OnInit {
   }
 
   onFindForm() {
-
     const urlArr = this.formUrl.split('/');
-    console.log(urlArr);
     const paramArr = urlArr[3].split('=');
-    console.log(paramArr);
     this.formUUID = paramArr[1];
     this.formUrl = `${this.baseUrl}${this.formUUID}`;
     this.router.navigate(['/form'], { queryParams: { id: this.formUUID } });

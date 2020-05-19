@@ -26,7 +26,7 @@ export class ResultsComponent implements OnInit {
   faFrownDefaultColor = '#FF3A6C';
   faMehDefaultColor = '#FFA538';
   faSmileDefaultColor = '#00D390';
-  
+
   textbox = 'textbox';
   textarea = 'textarea';
   radio = 'radio';
@@ -37,11 +37,8 @@ export class ResultsComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      console.log(params);
       this.formUUID = params.id;
-      console.log(`Results fetch id: ${this.formUUID}`);
       this.formUrl = `${this.baseUrl}${params.id}`;
-      console.log(`Results fetch url: ${this.formUrl}`);
     });
 
     this.fetchForm(this.formUrl);
