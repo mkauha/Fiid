@@ -10,7 +10,7 @@ var cors = require('cors')
 var flatfile = require('flat-file-db');
 var db = flatfile('./tmp/mydatabase.db');
 
-app.use(express.static(__dirname + '/Feedel/dist'));
+app.use(express.static(__dirname + '/Feedel/dist/'));
 app.use( bodyParser.json() );
 app.use(cors())
 
