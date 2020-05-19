@@ -34,7 +34,7 @@
 
   <div *ngSwitchCase="2">
     <h4>No form found :(</h4>
-    <input nbInput fullWidth type="text" required placeholder="URL" [(ngModel)]="formUrl" name="formUrl">
+    <input nbInput fullWidth type="text" required placeholder="URL/ID" [(ngModel)]="findForminput" name="findForminput">
     <button nbButton status="success" (click)="onFindForm()" class="buttonSubmit">Find</button>
   </div>
 

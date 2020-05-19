@@ -24,6 +24,7 @@ export class GeneratedFormComponent implements OnInit {
   baseApiUrl = environment.baseApiUrl;
   baseClientUrl = environment.baseClientUrl;
   formUrl = `${this.baseApiUrl}0ae34a35-d281-4867-89c2-1e2d77d747b6`;
+  findForminput = '';
 
   public showUrlInput = false;
   public formState = FormState.Open;
@@ -73,12 +74,12 @@ export class GeneratedFormComponent implements OnInit {
   }
 
   onFindForm() {
-    const urlArr = this.formUrl.split('/');
-    const paramArr = urlArr[3].split('=');
-    this.formUUID = paramArr[1];
-    this.formUrl = `${this.baseApiUrl}${this.formUUID}`;
+    if (this.formUUID.includes(this.baseClientUrl)) {
+      const urlArr = this.formUUID.split('/');
+      const paramArr = urlArr[3].split('=');
+      this.formUUID = paramArr[1];
+    }
     this.router.navigate(['/form'], { queryParams: { id: this.formUUID } });
-    this.showUrlInput = false;
   }
 
 }
