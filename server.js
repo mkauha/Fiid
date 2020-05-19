@@ -10,7 +10,7 @@ var cors = require('cors')
 var flatfile = require('flat-file-db');
 var db = flatfile('./tmp/mydatabase.db');
 
-app.use(express.static(__dirname + '/dist/'));
+app.use(express.static(__dirname + '/Feedel/dist/'));
 app.use( bodyParser.json() );
 app.use(cors())
 
@@ -93,9 +93,8 @@ for(var i=0; i<keys.length; i++) {
 }
 console.log(keys)
 
-app.get('/*', function(req,res) {
-    
-    res.sendFile(path.join(__dirname+'/dist/index.html'));
+app.get('*', function(req,res) {
+    res.sendFile(path.join(__dirname+'/dist/Feedel/index.html'));
 });
 
 app.get('/forms', function (req, res) {
