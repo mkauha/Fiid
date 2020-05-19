@@ -30,6 +30,7 @@ import { NbThemeModule,
   NbListModule,
   NbIconLibraries,
   NbAccordionModule,
+  NbTooltipModule,
  } from '@nebular/theme';
 
 @NgModule({
@@ -63,6 +64,7 @@ import { NbThemeModule,
     NbRadioModule,
     NbListModule,
     NbAccordionModule,
+    NbTooltipModule
   ],
   providers: [QuestionControlService, NbIconLibraries, HttpService],
   bootstrap: [AppComponent]
