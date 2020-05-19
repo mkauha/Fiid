@@ -95,7 +95,7 @@ for(var i=0; i<keys.length; i++) {
 }
 console.log(keys)
 
-app.get('/*', function(req,res) {
+app.get('*', function(req,res) {
     
     res.sendFile(path.join(__dirname+'/dist/fiid/index.html'));
     });
@@ -137,6 +137,4 @@ app.delete("/forms/:id(*)", function(req, res) {
 
 
 
-var server = app.listen(process.env.PORT || 8080, function () {
-  console.log('Server listening in http://localhost:3000/forms')
-})
+var server = app.listen(process.env.PORT || 8080);
