@@ -7,12 +7,10 @@ var app = express()
 var bodyParser = require('body-parser');
 var cors = require('cors')
 
-const { v4: uuidv4 } = require('uuid');
-
 var flatfile = require('flat-file-db');
 var db = flatfile('./tmp/mydatabase.db');
 
-app.use(express.static(__dirname + '/dist/fiid'));
+app.use(express.static(__dirname + '/dist'));
 app.use( bodyParser.json() );
 app.use(cors())
 
@@ -97,7 +95,7 @@ console.log(keys)
 
 app.get('*', function(req,res) {
     
-    res.sendFile('index.html', { root: 'dist/fiid/' })
+    res.sendFile('index.html', { root: 'dist/' })
     });
 
 app.get('/forms', function (req, res) {
