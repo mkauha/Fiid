@@ -164,11 +164,15 @@ export class FormbuilderComponent implements OnInit {
   }
 
   addRadioChoice() {
-    this.radioChoices.push('');
+    if (this.radioChoices.length < 10) {
+      this.radioChoices.push('');
+    }
   }
 
   removeRadioChoice() {
-    this.radioChoices.splice(this.radioChoices.length - 1);
+    if (this.radioChoices.length > 2) {
+      this.radioChoices.splice(this.radioChoices.length - 1);
+    }
   }
 
   reset() {

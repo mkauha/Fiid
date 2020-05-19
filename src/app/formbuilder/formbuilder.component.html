@@ -60,7 +60,7 @@
             <div *ngFor="let choice of radioChoices; let i = index">
               {{i+1}}
               <input status={{selectedInputStatus}} nbInput shape="round" type="text" class="form-control" id="radioChoice{{i+1}}" required placeholder="Option {{i+1}}" name="option{{i+1}}"
-              ngModel>
+              ngModel class="titleInput">
             </div>
           </div>
           <div class="buttonConfirm">
