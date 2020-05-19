@@ -12,7 +12,7 @@ const { v4: uuidv4 } = require('uuid');
 var flatfile = require('flat-file-db');
 var db = flatfile('./tmp/mydatabase.db');
 
-app.use(express.static(__dirname + '/dist'));
+app.use(express.static(__dirname + '/dist/fiid'));
 app.use( bodyParser.json() );
 app.use(cors())
 
@@ -97,7 +97,7 @@ console.log(keys)
 
 app.get('*', function(req,res) {
     
-    res.sendFile(path.join(__dirname+'/dist/index.html'));
+    res.sendFile('index.html', { root: 'dist/fiid/' })
     });
 
 app.get('/forms', function (req, res) {
