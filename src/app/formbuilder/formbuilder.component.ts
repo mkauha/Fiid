@@ -31,8 +31,9 @@ export class FormbuilderComponent implements OnInit {
   public showFormQuestionInput = false;
   public showGeneratedUrl = false;
   public formUUID = '';
-  public baseUrl = environment.baseUrl;
-  public generatedUrl = `${this.baseUrl}0ae34a35-d281-4867-89c2-1e2d77d747b6`;
+  baseApiUrl = environment.baseApiUrl;
+  baseClientUrl = environment.baseClientUrl;
+  public generatedUrl = `${this.baseClientUrl}form?id=0ae34a35-d281-4867-89c2-1e2d77d747b6`;
 
   public addButtonStatus = 'success';
   public addButtonIcon = 'plus';
@@ -266,7 +267,7 @@ export class FormbuilderComponent implements OnInit {
       this.qcs.saveForm(new GeneratedForm(this.formTitle, dateMonth, this.questions, this.questionResults));
       this.httpService.postGeneratedForm(this.formUUID, this.qcs.getForm());
       this.showGeneratedUrl = true;
-      this.generatedUrl = `${this.baseUrl}${this.formUUID}`;
+      this.generatedUrl = `${this.baseClientUrl}form?id=${this.formUUID}`;
     }
   }
 
