@@ -1,7 +1,7 @@
 <nb-layout>
     
     <nb-layout-header fixed>
-        <div><h1>Fiid</h1></div>
+        <div><h3>Fiid - Simple feedback forms</h3></div>
 
     </nb-layout-header>
   
@@ -22,7 +22,7 @@
             </div>
             <div *ngIf="showFormResultsInput">
                 <h3>Find form results</h3>
-                <input status="info" nbInput fieldSize="medium" shape="round" type="text" id="formUrl" name="formUrl" placeholder="Form ID" [(ngModel)]="formUUID">
+                <input status="info" nbInput fieldSize="medium" shape="round" type="text" id="formUrl" name="formUrl" placeholder="Form ID" [(ngModel)]="formResultsUUID">
                 <button nbButton status="info" shape="round" (click)="onGoToResults()" class="button"><nb-icon icon="search" ></nb-icon></button>
             </div>
         </div>
