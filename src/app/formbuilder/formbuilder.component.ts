@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { QuestionBase } from '../forms/question-base';
-import { QuestionControlService } from '../question-control.service';
+import { QuestionControlService } from '../services/question-control.service';
 import { FormGroup, NgForm } from '@angular/forms';
 import { TextboxQuestion } from '../forms/question-textbox';
 import { RadioQuestion } from '../forms/question-radio';
 import { TextareaQuestion } from '../forms/question-textarea';
 import { PreviewFormComponent } from '../preview-form/preview-form.component';
 import { EmojiQuestion } from '../forms/question-emoji';
-import { HttpService } from '../http.service';
+import { HttpService } from '../services/http.service';
 import { GeneratedForm } from '../forms/generated-form';
 import { v4 as uuidv4 } from 'uuid';
 import { Router } from '@angular/router';

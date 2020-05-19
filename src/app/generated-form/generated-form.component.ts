@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup} from '@angular/forms';
-import { QuestionControlService } from '../question-control.service';
+import { QuestionControlService } from '../services/question-control.service';
 import { QuestionBase } from '../forms/question-base';
-import { HttpService } from '../http.service';
+import { HttpService } from '../services/http.service';
 import { GeneratedForm } from '../forms/generated-form';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';

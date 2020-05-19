@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { HttpService } from '../http.service';
+import { HttpService } from '../services/http.service';
 import { QuestionBase } from '../forms/question-base';
 import { faSmile, faMeh, faFrown } from '@fortawesome/free-regular-svg-icons';
 import { environment } from 'src/environments/environment';
