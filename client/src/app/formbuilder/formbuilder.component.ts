@@ -11,6 +11,7 @@ import { HttpService } from '../http.service';
 import { GeneratedForm } from '../forms/generated-form';
 import { v4 as uuidv4 } from 'uuid';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -30,8 +31,7 @@ export class FormbuilderComponent implements OnInit {
   public showFormQuestionInput = false;
   public showGeneratedUrl = false;
   public formUUID = '';
-  public baseUrl = 'http://localhost:4200/form/';
-  public baseApiUrl = 'http://localhost:3000/forms/';
+  public baseUrl = environment.baseUrl;
   public generatedUrl = `${this.baseUrl}0ae34a35-d281-4867-89c2-1e2d77d747b6`;
 
   public addButtonStatus = 'success';

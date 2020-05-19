@@ -6,6 +6,7 @@ import { HttpService } from '../http.service';
 import { GeneratedForm } from '../forms/generated-form';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-generated-form',
@@ -20,8 +21,8 @@ export class GeneratedFormComponent implements OnInit {
   formTitle = ' ';
   formDate = ' ';
   formResults: string[] = [];
-  baseUrl = 'http://localhost:3000/forms/';
-  formUrl = 'http://localhost:3000/forms/0ae34a35-d281-4867-89c2-1e2d77d747b6';
+  baseUrl = environment.baseUrl;
+  formUrl = `${this.baseUrl}0ae34a35-d281-4867-89c2-1e2d77d747b6`;
 
   public showUrlInput = false;
   public formState = FormState.Open;
