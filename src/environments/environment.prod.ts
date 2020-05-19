@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  baseUrl: 'https://fiid.herokuapp.com/api/'
+  baseApiUrl: 'https://fiid.herokuapp.com/api/',
+  baseClientUrl: 'https://fiid.herokuapp.com/'
 };
