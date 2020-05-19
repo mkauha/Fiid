@@ -1,78 +1,102 @@
 <nb-layout>
     
     <nb-layout-header fixed>
-    <!-- Insert header here -->
+      <button nbButton status="danger" shape="round" routerLink="/"  class="buttonBack" ><nb-icon icon="chevron-left"></nb-icon></button>
+      <h1>Create a form</h1>
     </nb-layout-header>
   
     <nb-layout-column>
-  
-  
-      <div>
-        <h2>Create a form</h2>
-      </div>
-      <div>
-        <h3>Add a form question</h3>
-      </div>
-      <div>
-      <button (click)="onAddElement()" >{{buttonName}}</button>
+      
+
+        <div class="center" [ngSwitch]="showGeneratedUrl">
+
+          <div *ngSwitchCase="true">
+            <h1>Generated Form</h1>
+            <h6>{{formUUID}}</h6>
+            <input status="basic" nbInput fieldSize="large" shape="round" fullWidth type="text" id="generatedUrl" name="generatedUrl" style="text-align:center" readonly #userinput [(ngModel)]="generatedUrl">
+            <button class="button" nbTooltip="Results" nbButton status="info" shape="round" (click)="onGoToResults()"><nb-icon icon="activity"></nb-icon></button>
+            <button class="button" nbTooltip="Copy" nbButton status='primary' shape="round" (click)="onCopyGeneratedUrl(userinput)" ><nb-icon icon='copy'></nb-icon></button>
+            <button class="button" nbTooltip="Open" nbButton status="success" shape="round" (click)="onGoToGeneratedUrl()"><nb-icon icon="external-link"></nb-icon>
+            </button>
+          </div>
+
+          <div *ngSwitchCase="false">
+            <input nbInput fieldSize="giant" shape="round" type="text" placeholder="Form title"
+              [(ngModel)]="formTitle" name="formTitle" (change)=checkTitleValidity()>
+
+      <app-preview-form *ngIf="form" (onDeleteClicked)="delete($event)"[questions]=questions [form]=form [formTitle]=formTitle></app-preview-form>
+
+      <div class="center">
+      <button class="button" nbButton status={{addButtonStatus}} shape="round" (click)="onAddElement()" ><nb-icon icon={{addButtonIcon}}></nb-icon></button>
       <ng-container *ngIf="showAddButtons">
           <div>
-              <button (click)="onAddTextBoxElement()" >Textbox</button>
-              <button (click)="onAddTextAreaElement()" >Textarea</button>
-              <button (click)="onAddRadioElement()" >Radio</button>
+              <button class="button" nbButton  status={{textboxButtonStatus}} shape="round" (click)="onAddTextBoxElement()" ><nb-icon icon="minus"></nb-icon>Short</button>
+              <button class="button" nbButton  status={{textareaButtonStatus}} shape="round" (click)="onAddTextAreaElement()" ><nb-icon icon="menu"></nb-icon>Long</button>
+              <button class="button" nbButton  status={{radioButtonStatus}} shape="round" (click)="onAddRadioElement()" ><nb-icon icon="more-vertical"></nb-icon>Choice</button>
+              <button class="button" nbButton  status={{emojiButtonStatus}} shape="round" (click)="onAddEmojiElement()" ><nb-icon icon="smiling-face"></nb-icon>Emoji</button>
           </div>
       </ng-container>
-  
+      </div>
+    </div>
       <ng-container *ngIf="showFormQuestionInput">
       <div>
-      <form>
+      <form #form="ngForm" (ngSubmit)="onSubmitQuestion(form)">
         <div class="form-group">
-          <label for="questionLabel">Question: </label>
-          <input type="text" class="form-control" id="questionLabel" required placeholder="Insert question"
-            [(ngModel)]="questionLabel" name="first">
+          <div class="titleInput">
+            <input status={{selectedInputStatus}} nbInput type="text" shape="round" class="form-control" id="questionLabel" required placeholder="Your question title"
+              [(ngModel)]="questionLabel" name="questionLabel">
 
-          <label for="questionLabel">Required: </label>
-          <input type="checkbox" class="form-control" id="question" required placeholder="Insert question"
-          [(ngModel)]="questionisRequired" name="second">
+            <span class="requiredToggle">
+              <nb-toggle labelPosition="start" status={{selectedInputStatus}} class="form-control" id="requiredToggle" placeholder="Insert question"
+              [(ngModel)]="questionisRequired" name="requiredToggle">Required?</nb-toggle>
+            </span>
+          </div>
+
+          <div *ngIf="showChoiceInput">
+            <nb-icon ghost status='success' (click)="removeRadioChoice()" icon="minus"></nb-icon>
+            {{radioChoices.length}}
+            <nb-icon ghost status='danger' (click)="addRadioChoice()" icon="plus"></nb-icon>
+
+            <div *ngFor="let choice of radioChoices; let i = index">
+              {{i+1}}
+              <input status={{selectedInputStatus}} nbInput shape="round" type="text" class="form-control" id="radioChoice{{i+1}}" required placeholder="Option {{i+1}}" name="option{{i+1}}"
+              ngModel class="titleInput">
+            </div>
+          </div>
+          <div class="buttonConfirm">
+            <button nbButton status="success" shape="round"  class="btn btn-success" type="submit" [disabled]="!form.valid"><nb-icon icon="checkmark"></nb-icon></button>
+          </div>
         </div>
       </form>
       </div>
-      <button (click)="onSubmitQuestion()" class="btn btn-success">Add question</button>
+
+
     </ng-container>
-    </div>
-
-    <div>
-    <h3>Questions</h3>
-    </div>
-    <table>
-    <thead>
-      <tr>
-        <th>Key</th>
-        <th>Label</th>
-        <th>Type</th>
-        <th>Required</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let question of questions">
-      <td>{{question.key}}</td>
-      <td>{{question.label}}</td>
-      <td>{{question.controlType}}</td>
-      <td>{{question.required}}</td>
-      <td><button (click)="delete(question)">Remove</button></td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div>
-    <button routerLink="/form" (click)="onClickGenerateForm()" class="btn btn-success">Generate form</button>
   </div>
 
   </nb-layout-column>
 
   <nb-layout-footer fixed>
-  <!-- Insert footer here -->
+    <div [ngSwitch]="showGeneratedUrl">
+
+    <div *ngSwitchCase="false">
+
+      <button nbButton hero status="success" shape="round" (click)="onClickGenerateForm()" class="button" [disabled]="!formValid || !titleValid">
+        Generate form
+        <nb-icon icon="chevron-right"></nb-icon>
+      </button>
+    </div>
+
+    <div *ngSwitchCase="true">
+      <button class="button" nbButton status='warning' hero shape="round" (click)="onModifyForm()" ><nb-icon icon='chevron-left'></nb-icon>Modify</button>
+      <button nbButton status="success" hero shape="round" (click)="onGoToGeneratedUrl()">
+        Open form
+        <nb-icon icon="external-link"></nb-icon>
+      </button>
+    </div>
+
+  </div>
+
   </nb-layout-footer>
 
   </nb-layout>

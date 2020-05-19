@@ -1,25 +1,45 @@
 <nb-layout>
-  <nb-layout-header fixed>
-  <!-- Insert header here -->
-  </nb-layout-header>
-
   <nb-layout-column>
-  <div>
-    <h2>Generated form</h2>
-  </div>
-  <div>
-    <form [formGroup]="form">
-        <div *ngFor="let question of questions">
-          <app-question [question]="question" [form]="form"></app-question>
-        </div>
-        <button type="submit" [disabled]="!form.valid">Submit</button>
-    </form>
+    <div [ngSwitch]="formState">
+
+
+
+    <nb-card *ngSwitchCase="0">
+    <nb-card-header class="center">
+      <h2>{{formTitle}}</h2>
+      <p>{{formDate}}</p>
+    </nb-card-header>
+    <nb-card-body>
+    <div class="center">
+      
+      <form *ngIf="formGroup" (ngSubmit)="onSubmit()" [formGroup]="formGroup">
+          <div class="input" *ngFor="let question of questions">
+            <app-question [question]="question" [form]="formGroup"></app-question>
+          </div>
+          <div class="buttonSubmit">
+            <button nbButton status="success" [disabled]="!formGroup.valid" shape="round" type="submit">Submit</button>
+          </div>
+        </form>
+    </div>
+    </nb-card-body>
+  </nb-card>
+  
+
+
+  <div *ngSwitchCase="1" class="center">
+    <h4>Answers were submitted</h4>
+    <h4>Thank you!</h4>
+    <button nbButton status="info" shape="round" routerLink="/">You're welcome</button>
   </div>
 
+  <div *ngSwitchCase="2">
+    <h4>No form found :(</h4>
+    <input nbInput fullWidth type="text" required placeholder="URL/ID" [(ngModel)]="findForminput" name="findForminput">
+    <button nbButton status="success" (click)="onFindForm()" class="buttonSubmit">Find</button>
+    <button nbButton status="danger"  routerLink="/" class="buttonSubmit">Home</button>
+  </div>
+
+</div>
 </nb-layout-column>
-
-<nb-layout-footer fixed>
-<!-- Insert footer here -->
-</nb-layout-footer>
 
 </nb-layout>

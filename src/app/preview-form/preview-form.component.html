@@ -1,0 +1,11 @@
+
+    <div class="center">
+      
+      <form [formGroup]="form">
+          <div class="input" *ngFor="let question of questions">
+            <nb-icon nbButton ghost (click)="delete(question)" icon='trash' status="danger"></nb-icon>
+            <app-question [question]="question" [form]="form"></app-question>
+          </div>
+        </form>
+    </div>
+

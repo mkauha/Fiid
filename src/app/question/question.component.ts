@@ -1,8 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { TextboxQuestion } from '../forms/question-textbox';
-import { QuestionBase } from '../forms/question-base';
-import { Form } from '@angular/forms';
+
 
 @Component({
   selector: 'app-question',
@@ -13,10 +11,14 @@ export class QuestionComponent implements OnInit {
 
   @Input() question;
   @Input() form: FormGroup;
+  selectedRadioOption: string;
+  selectedEmoji: string;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  emojiClick(event: string) {
+    this.selectedEmoji = event;
   }
-
 }

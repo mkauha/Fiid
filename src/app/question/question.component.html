@@ -1,13 +1,19 @@
 <div [ngSwitch]="question.controlType" [formGroup]="form">
-    <label>{{question.label}} </label>
-    <input *ngSwitchCase="'textbox'" [type]="question.textboxtype" [formControlName]="question.key">
+    <label class="input-label">{{question.label}} </label>
+    <div><input nbInput fullWidth *ngSwitchCase="'textbox'" [type]="question.textboxtype" [formControlName]="question.key" class="textbox" [required]="question.required"></div>
 
-     <div *ngSwitchCase="'textarea'">
-      <textarea [rows]="question.rows" [formControlName]="question.key"></textarea>
+     <div *ngSwitchCase="'textarea'" >
+      <textarea nbInput fullWidth [rows]="question.rows" [formControlName]="question.key" class="textarea"></textarea>
     </div>
 
-    <div *ngSwitchCase="'radio'">
-      <input *ngSwitchCase="'radio'" id="key" [formControlName]="question.key"> 
+    <div *ngSwitchCase="'radio'" class="radio-input">
+      <nb-radio-group [formControlName]="question.key" [(ngModel)]="selectedRadioOption" *ngFor="let choice of question.choices | keyvalue">
+        <nb-radio [name]="choice.value" [value]="choice.value">{{choice.value}}</nb-radio>
+      </nb-radio-group>
+    </div>
+
+    <div *ngSwitchCase="'emoji'" class="input">
+      <app-div-emoji-select [formControlName]="question.key" [(ngModel)]="selectedEmoji" (onEmojiClick)="emojiClick($event)"></app-div-emoji-select>
     </div>
 
 </div>

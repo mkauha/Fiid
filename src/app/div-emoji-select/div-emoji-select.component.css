@@ -1,22 +1,3 @@
-.input {
-   
-}
-
-.input-label {
-    
-}
-
-.textbox, textarea {
-    max-width: 60%;
-}
-
-.radio-input {
-    margin-bottom: 24px;
-    margin: auto;
-    width: 40%;
-}
-
-
 .emoji-icon {
     font-size: 2.5rem;
     margin: 5px;
