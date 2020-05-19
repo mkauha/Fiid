@@ -8,6 +8,7 @@
     <nb-layout-column>
         <div class="center">
             <div>
+                <h4>Find a form</h4>
                 <input status="success" nbInput fieldSize="medium" shape="round" type="text" id="formUrl" name="formUrl" placeholder="Form ID" [(ngModel)]="formUUID" class="button">
                 <button nbButton status="success" shape="round" (click)="onGoToForm()"><nb-icon icon="search"></nb-icon></button>
             </div>
@@ -21,7 +22,7 @@
                 </button>
             </div>
             <div *ngIf="showFormResultsInput">
-                <h3>Find form results</h3>
+                <h4>Find form results</h4>
                 <input status="info" nbInput fieldSize="medium" shape="round" type="text" id="formUrl" name="formUrl" placeholder="Form ID" [(ngModel)]="formResultsUUID">
                 <button nbButton status="info" shape="round" (click)="onGoToResults()" class="button"><nb-icon icon="search" ></nb-icon></button>
             </div>
