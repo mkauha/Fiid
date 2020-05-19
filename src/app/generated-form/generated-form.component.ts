@@ -3,7 +3,7 @@ import { FormGroup} from '@angular/forms';
 import { QuestionControlService } from '../services/question-control.service';
 import { QuestionBase } from '../forms/question-base';
 import { HttpService } from '../services/http.service';
-import { GeneratedForm } from '../forms/generated-form';
+import { GeneratedForm } from './generated-form';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';

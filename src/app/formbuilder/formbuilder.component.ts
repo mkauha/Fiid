@@ -8,7 +8,7 @@ import { TextareaQuestion } from '../forms/question-textarea';
 import { PreviewFormComponent } from '../preview-form/preview-form.component';
 import { EmojiQuestion } from '../forms/question-emoji';
 import { HttpService } from '../services/http.service';
-import { GeneratedForm } from '../forms/generated-form';
+import { GeneratedForm } from '../generated-form/generated-form';
 import { v4 as uuidv4 } from 'uuid';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';

@@ -1,4 +1,4 @@
-import { QuestionBase } from './question-base';
+import { QuestionBase } from '../forms/question-base';
 
 export class GeneratedForm {
     title: string;
