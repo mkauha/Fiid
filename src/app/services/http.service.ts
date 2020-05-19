@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class HttpService {
-  private postUrl = environment.baseUrl;
+  private url = environment.baseApiUrl;
 
   constructor(private http: HttpClient) { }
 
@@ -19,12 +19,12 @@ export class HttpService {
 
   postGeneratedForm(UUID: string, generatedForm: GeneratedForm) {
     const postedForm = {id: UUID, form: generatedForm};
-    this.http.post<GeneratedForm>(this.postUrl, postedForm, {observe: 'response'}).subscribe(response => {
+    this.http.post<GeneratedForm>(this.url, postedForm, {observe: 'response'}).subscribe(response => {
     });
   }
 
   deleteGeneratedForm(UUID: string) {
-    this.http.delete(this.postUrl + UUID).subscribe(response => {
+    this.http.delete(this.url + UUID).subscribe(response => {
     });
   }
 }
