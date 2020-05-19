@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { GeneratedForm } from './forms/generated-form';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpService {
-  private postUrl = 'http://localhost:3000/forms/';
+  private postUrl = environment.baseUrl;
 
   constructor(private http: HttpClient) { }
 

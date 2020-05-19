@@ -1,14 +1,16 @@
 
 'use strict'
 var express = require('express')
+const path = require('path');
 var app = express()
+
 var bodyParser = require('body-parser');
 var cors = require('cors')
 
-const { v4: uuidv4 } = require('uuid');
-
 var flatfile = require('flat-file-db');
 var db = flatfile('./tmp/mydatabase.db');
+
+app.use(express.static('./dist/Feedel'));
 app.use( bodyParser.json() );
 app.use(cors())
 
@@ -91,6 +93,8 @@ for(var i=0; i<keys.length; i++) {
 }
 console.log(keys)
 
+
+
 app.get('/forms', function (req, res) {
     var keys = db.keys();
     var data = [];
@@ -126,8 +130,9 @@ app.delete("/forms/:id(*)", function(req, res) {
     res.send(db.del(paramID));
 });
 
+app.get('/*', function(req,res) {
+    res.sendFile('index.html', { root: 'dist/Feedel/' })
+});
 
 
-var server = app.listen(3000, function () {
-  console.log('Server listening in http://localhost:3000/forms')
-})
+app.listen(process.env.PORT || 8080);

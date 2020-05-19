@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpService } from '../http.service';
 import { QuestionBase } from '../forms/question-base';
 import { faSmile, faMeh, faFrown } from '@fortawesome/free-regular-svg-icons';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-results',
@@ -16,8 +17,8 @@ export class ResultsComponent implements OnInit {
   questions: QuestionBase[] = [];
   formResults = [];
   questionIcon = '';
-  baseUrl = 'http://localhost:3000/forms/';
-  formUrl = 'http://localhost:3000/forms/0ae34a35-d281-4867-89c2-1e2d77d747b6';
+  baseUrl = environment.baseUrl;
+  formUrl = `${this.baseUrl}0ae34a35-d281-4867-89c2-1e2d77d747b6`;
 
   faFrown = faFrown;
   faMeh = faMeh;
