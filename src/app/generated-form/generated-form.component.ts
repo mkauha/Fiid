@@ -74,12 +74,12 @@ export class GeneratedFormComponent implements OnInit {
   }
 
   onFindForm() {
-    if (this.formUUID.includes(this.baseClientUrl)) {
-      const urlArr = this.formUUID.split('/');
+    if (this.findForminput.includes(this.baseClientUrl)) {
+      const urlArr = this.findForminput.split('/');
       const paramArr = urlArr[3].split('=');
-      this.formUUID = paramArr[1];
+      this.findForminput = paramArr[1];
     }
-    this.router.navigate(['/form'], { queryParams: { id: this.formUUID } });
+    this.router.navigate(['/form'], { queryParams: { id: this.findForminput } });
   }
 
 }
