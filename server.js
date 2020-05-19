@@ -2,11 +2,9 @@
 'use strict'
 var express = require('express')
 const path = require('path');
-var app = express()
-
 var bodyParser = require('body-parser');
 var cors = require('cors')
-
+var app = express()
 var flatfile = require('flat-file-db');
 var db = flatfile('./tmp/mydatabase.db');
 
@@ -84,18 +82,14 @@ db.put(testID, {
     },
 });
 
-
 var keys = db.keys();
 var data = [];
 
 for(var i=0; i<keys.length; i++) {
     data[i] = db.get(keys[i]);
 }
-console.log(keys)
 
-
-
-app.get('/forms', function (req, res) {
+app.get('/api', function (req, res) {
     var keys = db.keys();
     var data = [];
     for(var i=0; i<keys.length; i++) {
@@ -105,28 +99,22 @@ app.get('/forms', function (req, res) {
   
 });
 
-// TODO setup regex
-app.get("/forms/:id(*)", function(req, res) {
+app.get("/api/:id(*)", function(req, res) {
     var paramID = req.params.id
-    console.log(`GET forms with UUID: ${paramID}`);
     res.send(db.get(paramID));
 });
 
-app.post('/forms/', function(req, res) {
+app.post('/api/', function(req, res) {
     var paramID = req.body.id;
-    console.log(`PUT with UUID: ${paramID}`);
     db.put(paramID, {form: req.body.form});
     console.log(req.body.form);
     res.status(201);
-    res.location("http://localhost:3000/forms/" + req.body.id);
+    res.location("https://fiid.herokuapp.com/api/" + req.body.id);
     res.send();
-    console.log(db.keys());
 });
 
-// TODO setup regex
-app.delete("/forms/:id(*)", function(req, res) {
+app.delete("/api/:id(*)", function(req, res) {
     var paramID = req.params.id;
-    console.log(`DEL with UUID: ${paramID}`);
     res.send(db.del(paramID));
 });
 

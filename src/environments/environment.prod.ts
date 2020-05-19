@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: 'https://fiid.herokuapp.com/forms/'
+  baseUrl: 'https://fiid.herokuapp.com/api/'
 };
