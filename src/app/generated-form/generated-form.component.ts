@@ -21,8 +21,9 @@ export class GeneratedFormComponent implements OnInit {
   formTitle = ' ';
   formDate = ' ';
   formResults: string[] = [];
-  baseUrl = environment.baseUrl;
-  formUrl = `${this.baseUrl}0ae34a35-d281-4867-89c2-1e2d77d747b6`;
+  baseApiUrl = environment.baseApiUrl;
+  baseClientUrl = environment.baseClientUrl;
+  formUrl = `${this.baseApiUrl}0ae34a35-d281-4867-89c2-1e2d77d747b6`;
 
   public showUrlInput = false;
   public formState = FormState.Open;
@@ -35,7 +36,7 @@ export class GeneratedFormComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.formUUID = params.id;
-      this.formUrl = `${this.baseUrl}${params.id}`;
+      this.formUrl = `${this.baseApiUrl}${params.id}`;
 
       this.fetchForm(this.formUrl);
 
@@ -75,7 +76,7 @@ export class GeneratedFormComponent implements OnInit {
     const urlArr = this.formUrl.split('/');
     const paramArr = urlArr[3].split('=');
     this.formUUID = paramArr[1];
-    this.formUrl = `${this.baseUrl}${this.formUUID}`;
+    this.formUrl = `${this.baseApiUrl}${this.formUUID}`;
     this.router.navigate(['/form'], { queryParams: { id: this.formUUID } });
     this.showUrlInput = false;
   }
