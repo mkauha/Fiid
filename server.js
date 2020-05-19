@@ -93,9 +93,7 @@ for(var i=0; i<keys.length; i++) {
 }
 console.log(keys)
 
-app.get('*', function(req,res) {
-    res.sendFile('index.html', { root: 'dist/Feedel/' })
-});
+
 
 app.get('/forms', function (req, res) {
     var keys = db.keys();
@@ -132,6 +130,9 @@ app.delete("/forms/:id(*)", function(req, res) {
     res.send(db.del(paramID));
 });
 
+app.get('/*', function(req,res) {
+    res.sendFile('index.html', { root: 'dist/Feedel/' })
+});
 
 
 app.listen(process.env.PORT || 8080);
