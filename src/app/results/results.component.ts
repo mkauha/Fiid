@@ -17,8 +17,8 @@ export class ResultsComponent implements OnInit {
   questions: QuestionBase[] = [];
   formResults = [];
   questionIcon = '';
-  baseUrl = environment.baseUrl;
-  formUrl = `${this.baseUrl}0ae34a35-d281-4867-89c2-1e2d77d747b6`;
+  baseApiUrl = environment.baseApiUrl;
+  formUrl = `${this.baseApiUrl}0ae34a35-d281-4867-89c2-1e2d77d747b6`;
 
   faFrown = faFrown;
   faMeh = faMeh;
@@ -38,7 +38,7 @@ export class ResultsComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.formUUID = params.id;
-      this.formUrl = `${this.baseUrl}${params.id}`;
+      this.formUrl = `${this.baseApiUrl}${params.id}`;
     });
 
     this.fetchForm(this.formUrl);
