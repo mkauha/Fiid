@@ -1,11 +1,12 @@
 # Fiid
-A simple feedback form web app made with Angular/Node.js 
+A simple feedback forms web-app made with Angular/Node.js 
+https://fiid.herokuapp.com/
 
+![Creating a new form](https://i.ibb.co/DV09ffB/85-U2-ZSa-Bvu.gif)
 
-Creating a new form
-![](https://ibb.co/r7Dx22B)
+![Submitting answers](https://i.ibb.co/ZXk6q7Z/U9-Vx-Yjaqq-L.gif)
 
-
+![Viewing results](https://i.ibb.co/7yHYd7h/DI7f-WUHu0e.gif)
 
 
 
