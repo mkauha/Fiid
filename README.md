@@ -1,4 +1,18 @@
 # Fiid
+A simple feedback form web app made with Angular/Node.js 
+
+
+Creating a new form
+![](https://ibb.co/r7Dx22B)
+
+
+
+
+
+
+
+
+
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.5.
 
