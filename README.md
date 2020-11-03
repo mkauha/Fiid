@@ -1,5 +1,5 @@
 # Fiid
-A simple feedback forms web-app made with Angular/Node.js 
+A simple feedback forms web-app made with Angular/Node.js/Express 
 https://fiid.herokuapp.com/
 
 Creating a new form
